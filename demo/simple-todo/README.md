@@ -13,8 +13,8 @@ The page can be opened by a browser and can be designed using some classes and C
 <!DOCTYPE html><html><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <<title>Weaveworld To Do List</title>
-  <script src="w.js"></script>
-  <link href="w.css" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/gh/weaveworld/Weaveworld/w.js"></script>
+  <link href="https://cdn.jsdelivr.net/gh/weaveworld/Weaveworld/w.css" rel="stylesheet"/>
   <script src="simple-todo.js"></script>
 </head>
 <body>
@@ -251,8 +251,8 @@ The HTML:
 <!DOCTYPE html>
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <title>Weaveworld To Do List</title>
-  <script src="https://weaveworld.org/w@0.10.1903/w.min.js"></script>
-  <link href="https://weaveworld.org/w@0.10.1903/w.css" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/gh/weaveworld/Weaveworld/w.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/gh/weaveworld/Weaveworld/w.css" rel="stylesheet"/>
   <script src="simple-todo.js"></script>
   <script>  
     // W$DATA=undefined
