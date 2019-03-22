@@ -13,7 +13,7 @@ Usage (VERSION: MAJOR.MINOR.DATE; suggested use: MAJOR.MINOR, e.g., .../`Weavewo
   <link href="https://cdn.jsdelivr.net/gh/weaveworld/Weaveworld@VERSION/w.css" rel="stylesheet"/>
 ```
 
-**Using** Weaveworld is extremely simple. (see: A [simple example to do list](demo/simple-todo).)
+**Using** Weaveworld is extremely simple. (see: [A simple example to do list](demo/simple-todo) tutorial.)
 * Create an HTML page with example data.
 * Provide some data (constant data or results of AJAX-call).
 * Put HTML attributes to control data-binding.    

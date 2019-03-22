@@ -2,6 +2,8 @@
 
 Using Weaveworld is extremely simple.
 
+(See the example on [jsFiddle](https://jsfiddle.net/weaveworld/jtcwxyn9/).)
+
 ### HTML with example data ###
 
 Firstly, let's create a simplified HTML page `simple-todo.html` with some example data, and an empty `simple-todo.js` file.
