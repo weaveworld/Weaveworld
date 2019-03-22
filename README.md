@@ -24,9 +24,13 @@ Usage (current version: 0.10.190320; suggested use: 0.10):
 * Furthermore, Weaveworld is highly customizable.
 
 Weaveworld (ῶ) **main features**:
-* [Template](doc/doc-1-template) engine: example HTML is filled with current data.  
-  * [Navigation](doc/doc-1-template#navigation-condition-iteration): `w:the`, `w:each` (`w:when`), `w:if`, (`w:else`)
-  * Element properties: `w:attr:X`, `w:data:X`, `w:style:X`, `w:set:X`, `w:value`, `w:show`, `w:warning`
+* [Template](doc/doc-1-template.md) engine: example HTML is filled with current data.  
+  * [Expression](doc/doc-1-template.md#template-expressions): 
+    * current data, fields, subfields
+    * `true`, `false`, `null`, `undefined`, `0`, `1`, `""`, `''`
+    * `!`, `= !`, `|`, `? :` `[ ]`
+  * [Navigation](doc/doc-1-template.md#navigation-condition-iteration): `w:the`, `w:each` (`w:when`), `w:if`, (`w:else`)
+  * [Element](doc/doc-1-template.md#property-like-controls) properties: `w:attr:X`, `w:data:X`, `w:style:X`, `w:set:X`, `w:value`, `w:show`, `w:warning`
 * **Two-way data-binding**: change of data causes DOM-element update.
 * **Event-handling**: events can be handled in so called "type-handlers" (simple JS objects).
   * `w:on:X`, `w:on:X:data`, `w:on:X:set`, `w:on:X:menu`
