@@ -4,7 +4,7 @@
 
 **License**: it is _free_ to use, but _**not** open-source_ during its experimental phase (i.e., it is not allowed to use elsewhere parts or modified versions of the source, however the framework is totally customizable and redefinable). Weaveworld is about the one tenth of the Weaveworld-ONCE web framework. Patent pending for the "type-binding" technique. See: [licence](LICENSE).
 
-Usage (current version: 0.10.190320; suggested use: 0.10):
+Usage (VERSION: MAJOR.MINOR.DATE; suggested use: MAJOR.MINOR, e.g., .../`Weaveworld@0.10/`...):
 ```html
   <script src="https://cdn.jsdelivr.net/gh/weaveworld/Weaveworld@VERSION/w.min.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/weaveworld/Weaveworld@VERSION/w.css" rel="stylesheet"/>
@@ -26,8 +26,7 @@ Usage (current version: 0.10.190320; suggested use: 0.10):
 Weaveworld (ῶ) **main features**:
 * [Template](doc/doc-1-template.md) engine: example HTML is filled with current data.  
   * [Expression](doc/doc-1-template.md#template-expressions): 
-    * current data, fields, subfields
-    * `true`, `false`, `null`, `undefined`, `0`, `1`, `""`, `''`
+    * current data, (sub)fields, `X\A.B.C`, `true`, `false`, `null`, `undefined`, `0`, `1`, `""`, `''`, expressions
     * `!`, `= !`, `|`, `? :` `[ ]`
   * [Navigation](doc/doc-1-template.md#navigation-condition-iteration): `w:the`, `w:each` (`w:when`), `w:if`, (`w:else`)
   * [Element](doc/doc-1-template.md#property-like-controls) properties: `w:attr:X`, `w:data:X`, `w:style:X`, `w:set:X`, `w:value`, `w:show`, `w:warning`
