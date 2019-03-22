@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>Weaveworld To Do List</title>
+  <script src="../../w.min.js"></script>
+  <link href="../../w.css" rel="stylesheet"/>
+  <script src="simple-todo.js"></script>
+</head>
+<body>
+  <div class=TodoList w:the>
+    <h3><span w:text=data.title>To Do List</span> <sup w:text="({{list.length|'-'}})">(2)</sub></h3>
+    <ul w:each=list>
+      <li class=Todo w:the>
+        <button w:on:onclick=todoDelete>-</button> 
+        <span w:text=name>Todo 1</span>
+      </li>  
+      <li w:the>
+        <button>-</button> 
+        <span>Todo 2</span>
+      </li>
+    </ul>
+    <blockquote>
+      <form w:name="todoAdd" w:the=[toNew] w:type=Todo>
+        <input type=text class=winput w:name=name size=20><sup></sup>
+        <button>+</button>
+      </form>
+    </blockquote>
+  </div> 
+</body>
+</html>
