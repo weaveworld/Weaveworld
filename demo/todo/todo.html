@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>ToDo</title>
+<script src="https://cdn.jsdelivr.net/gh/weaveworld/Weaveworld/w.min.js"></script>
+<link href="https://cdn.jsdelivr.net/gh/weaveworld/Weaveworld/w.css" rel="stylesheet"/>
+<link href="todo.css" rel="stylesheet"/>
+<script src="todo.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div class="ToDo" w:the>
+      <img class="Logo" src="logo.jpg" alt="ῶ logo"/>
+      <h1 class="ToDo-Header">Weaveworld To Do</h1>
+      <div class="ToDo-Container">
+        <div class="ToDo-Content" w:each=list>
+          <div class="ToDoItem Item" w:the>
+            <p class="ToDoItem-Text" w:text=text>Todo text</p>
+            <div class="ToDoItem-Delete" w:on:onclick='itemDelete'>-</div>
+  				</div>          
+          <div class="ToDoItem Item" w:the>
+            <p class="ToDoItem-Text">Second Todo text</p>
+            <div class="ToDoItem-Delete">-</div>
+          </div>          
+	        <form class="Item" w:the=[newTodo] w:type=Item w:name='itemAdd'>
+	          <input type="text" class=winput w:name="text">
+	          <input type="submit" class="ToDo-Add" name=add value="+">
+	        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
