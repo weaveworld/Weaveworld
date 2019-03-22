@@ -1,8 +1,8 @@
 W$DATA={ 
   list: [
-	  { id: 1, text: 'clean the house' },
-	  { id: 2, text: 'buy milk' }
-	]
+    { id: 1, text: 'clean the house' },
+    { id: 2, text: 'buy milk' }
+  ]
 };
 
 W$TYPE={ $name:'ToDo',

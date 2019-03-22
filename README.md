@@ -4,8 +4,8 @@
 
 **License**: it is _free_ to use, but _**not** open-source_ during its experimental phase (i.e., it is not allowed to use elsewhere parts or modified versions of the source, however the framework is totally customizable and redefinable). Weaveworld is about the one tenth of the Weaveworld-ONCE web framework. Patent pending for the "type-binding" technique. See: [licence](LICENSE).
 
-For comparison, there's a [simplified demo page](demo/todo), which functional equivalent are also in Vue, React and Angular.    
-In case of full-scale business web applications, the code based on Weaveworld is about 2-4 times smaller and simpler.
+For comparison, there's a [simplified demo page](demo/todo), which functional equivalent versions are also in Vue, React and Angular.    
+In case of full-scale business web applications, the code based on Weaveworld is about 2-4 times smaller and simpler than the usual methods.
 
 Usage (VERSION: MAJOR.MINOR.DATE; suggested use: MAJOR.MINOR, e.g., .../`Weaveworld@0.10/`...)
 ```html
