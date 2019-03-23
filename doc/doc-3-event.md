@@ -45,7 +45,7 @@ In case of clicking on `sup`, Weaveworld looks upward and finds the `div` with t
 
 In case of an event (not handled otherwise), Weaveworld tries to handle the event, starting from the event target element through parent elements. 
 
-If the element has an an attribute that starts with "w:on:on"... that follows the event name (e.g., `w:on:onclick`), then Weaveworld converts the event.
+If the element has an an attribute that starts with `w:on:on`... that follows the event name (e.g., `w:on:onclick`), then Weaveworld converts the event.
 
 Let's see an example (See on [jsFiddle](https://jsfiddle.net/weaveworld/bag0kL8p/)):
 ```js
