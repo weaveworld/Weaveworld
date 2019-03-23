@@ -9,12 +9,12 @@ Example DOM L2 event-handler:
 After the page is loaded, Weaveworld is initialized to handle events.
 
 
-### DOM events ###
+### Low-level Event-handling ###
 
 
-In case of an event (not handled by otherwise) Weaveworld tries to make "type-binding", starting from the event target element through parent elements it checks if one of the element (CSS) class name is registered as a type-handler.
+In case of an event (not handled otherwise), Weaveworld tries to make a "type-binding", starting from the event target element through parent elements, it checks if one of the element (CSS) class name is registered as a type-handler.
 
-Let's see the following element ([jsFiddle](https://jsfiddle.net/weaveworld/630xncta/)):
+Let's see the following element (see on [jsFiddle](https://jsfiddle.net/weaveworld/630xncta/)):
 ```html
 <div class="Time t-container">
   <input type="number" name="hour" value=23
@@ -39,4 +39,40 @@ W$TYPE={ $name:'Time',
   }
 }
 ```
-In case of a click
+In case of clicking on `sup`, Weaveworld looks upward and finds the `div` with the `Time` (CSS) named class, what have a registered type and have an onclick "type-handler rule".
+
+### High-level Event-handling ###
+
+In case of an event (not handled otherwise), Weaveworld tries to handle the event, starting from the event target element through parent elements. 
+
+If the element has an an attribute that starts with "w:on:on"... that follows the event name (e.g., `w:on:onclick`), then Weaveworld converts the event.
+
+Let's see an example (See on [jsFiddle](https://jsfiddle.net/weaveworld/bag0kL8p/)):
+```js
+W$DATA={
+  amount:1
+};
+W$TYPE={ $name:'Amount',
+  amountIncrase: function(el,ev){ 
+    ++this.amount;
+  },
+  amountDecrase: function(el,ev){ 
+    --this.amount;
+  },
+}
+```
+
+```html
+<div class="Amount" w:the>
+  <input type="number" name="amount" w:set:value="amount">
+  <input type="button" class=wbutton value="+" 
+           w:on:onclick=amountIncrase>
+  <input type="button" class=wbutton value="-"     
+           w:on:onclick=amountDecrase>
+</div>
+```
+In case of clicking on one of the buttons, when Weaveworld find a `w:on:onclick` attribute, then the event will be converted using the attribute value.
+
+
+
+### Event-handling, arguments and result ###
