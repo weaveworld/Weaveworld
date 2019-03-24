@@ -50,7 +50,7 @@ If the element has a matching _event declaration_, that is an attribute that sta
 Let's see an example (See on [jsFiddle](https://jsfiddle.net/weaveworld/bag0kL8p/)):
 ```js
 W$DATA={
-  product:{ id: 123456, name: 'bulb', amount:1 }
+  product:{ id: 123456, name: 'Bulb', amount:1, }
 };
 W$TYPE={ $name:'Amount',
   increaseAmount: function(el,ev){ 
@@ -64,8 +64,9 @@ W$TYPE={ $name:'Amount',
 
 ```html
 <div class="Amount" w:the=product>
-  <input type="number" name="amount" w:set:value="amount">
+  <span w:text=name>Product name</span>
   <!--!w:css! div.Amount>input[name="amount"]{ max-width:4em; }--> 
+  <input type="number" name="amount" w:set:value="amount">
   <input type="button" class=wbutton value="+" 
            w:on:onclick=increaseAmount>
   <input type="button" class=wbutton value="-"     
@@ -90,8 +91,9 @@ W$TYPE={ $name:'Amount',
 
 ```html
 <div class="Amount" w:the=product>
-  <input type="number" name="amount" w:set:value="amount">
+  <span w:text=name>Product name</span>
   <!--!w:css! div.Amount>input[name="amount"]{ max-width:4em; }--> 
+  <input type="number" name="amount" w:set:value="amount">
   <input type="button" class=wbutton value="+" w:on:onclick='changeAmount{"n":1}'>
   <input type="button" class=wbutton value="-" w:on:onclick='changeAmount{"n":-1}'>
 </div>
@@ -111,7 +113,7 @@ W$DATA={
   product:{ id: 123456, name: 'Bulb', amount:1 }
 };
 W$TYPE={ $name:'Amount',
-  changeAmount$arg: "w$call:'changeAmount',id",
+  changeAmount$arg: "$call:'changeAmount',id",
   changeAmount: function(el,ev,arg){ 
     this.amount+=arg.n;
     console.log(arg);

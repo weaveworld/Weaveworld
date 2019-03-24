@@ -38,15 +38,17 @@ Weaveworld (ῶ) **main features**:
   * [High-level Event-handling](doc/doc-2-event.md#high-level-event-handling), `w:on:X`
   * [Event-handling, parameters and return values](doc/doc-2-event.md#event-handling-parameters-and-return-values), _X_`$arg` 
   * `w:on:X:menu`, `w:on:X:data`, `w:on:X:set`, `w:on:X:action`,
-* **Two-way data-binding**: change of data causes DOM-element update.
+* [Two-way data-binding](doc/doc-3-data-binding): change of data results DOM-element update.
+  * 'Weaving' - `w$refresh`, `w$weave`; Server call - `W$CALL`
+  * Initial data - `W$DATA`, `W$START`; Initialization - `W$ONLOAD`
 * "**Type-handlers**": data derivation, transformation, view control, etc.
   * `class`, `w:type`
 * "**Super-templates**": setting defaults based on type-handler rules.
   * `w:name`, `w:named`
-* **Access-control**: levels of view, update, delete, etc.
-  * `w:for`, `w:show:for`, `w:enable:for`
 * **Validation**: basic methods to check and display validation errors.
   * `w:warning`
+* **Access-control**: levels of view, update, delete, etc.
+  * `w:for`, `w:show:for`, `w:enable:for`
 * **(Re)action contexts**, that means complex reactions for events.
   * `w:at`, `at$`_X_
 * Basic **localization**: string translation using a dictionary.
