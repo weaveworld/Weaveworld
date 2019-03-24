@@ -113,11 +113,11 @@ W$DATA={
   product:{ id: 123456, name: 'Bulb', amount:1 }
 };
 W$TYPE={ $name:'Amount',
-  changeAmount$arg: "$call:'changeAmount',id",
+  changeAmount$arg: "id",
   changeAmount: function(el,ev,arg){ 
     this.amount+=arg.n;
     console.log(arg);
-    // W$CALL(arg,el)
+    // W$CALL('changeAmount', arg,el)
   },
 }
 ```
