@@ -7,7 +7,7 @@
 For comparison, there's a [simplified demo page](demo/todo), which functional equivalent versions are also in Vue, React and Angular.    
 In case of full-scale business web applications, the code based on Weaveworld is about 2-4 times smaller and simpler than the usual methods.
 
-Usage (VERSION: MAJOR.MINOR.DATE; suggested use: MAJOR.MINOR, e.g., .../`Weaveworld@0.10/`...)
+Usage (where VERSION: MAJOR.MINOR.DATE; suggested use: MAJOR.MINOR, e.g., .../`Weaveworld@0.10/`...)
 ```html
   <script src="https://cdn.jsdelivr.net/gh/weaveworld/Weaveworld@VERSION/w.min.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/weaveworld/Weaveworld@VERSION/w.css" rel="stylesheet"/>
@@ -33,12 +33,12 @@ Weaveworld (ῶ) **main features**:
     * `!`, `= !`, `|`, `? :` `[ ]`
   * [Navigation](doc/doc-1-template.md#navigation-condition-iteration): `w:the`, `w:each` (`w:when`), `w:if`, (`w:else`)
   * [Element](doc/doc-1-template.md#property-like-controls) properties: `w:attr:X`, `w:data:X`, `w:style:X`, `w:set:X`, `w:value`, `w:show`, `w:warning`
-* **Two-way data-binding**: change of data causes DOM-element update.
 * [Event-handling](doc/doc-2-event.md): events can be handled in so called "type-handlers" (simple JS objects).
-  * `w:on:X`
+  * [Low-level Event-handling](doc/doc-2-event.md#low-level-event-handling)
+  * [High-level Event-handling](doc/doc-2-event.md#high-level-event-handling), `w:on:X`
+  * [Event-handling, parameters and return values](doc/doc-2-event.md#event-handling-parameters-and-return-values), _X_`$arg` 
   * `w:on:X:menu`, `w:on:X:data`, `w:on:X:set`, `w:on:X:action`,
-* **(Re)action contexts**, that means complex reactions for events.
-  * `w:at`, `at$X`
+* **Two-way data-binding**: change of data causes DOM-element update.
 * "**Type-handlers**": data derivation, transformation, view control, etc.
   * `class`, `w:type`
 * "**Super-templates**": setting defaults based on type-handler rules.
@@ -47,4 +47,6 @@ Weaveworld (ῶ) **main features**:
   * `w:for`, `w:show:for`, `w:enable:for`
 * **Validation**: basic methods to check and display validation errors.
   * `w:warning`
+* **(Re)action contexts**, that means complex reactions for events.
+  * `w:at`, `at$`_X_
 * Basic **localization**: string translation using a dictionary.

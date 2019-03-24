@@ -1,4 +1,4 @@
-## Weaveworld (ῶ) - Events ##
+# Weaveworld (ῶ) - Events #
 
 First of all, the [DOM event-handling](https://www.w3.org/TR/DOM-Level-2-Events/events.html) can be used, and it overrides Weaveworld's event handling.
 
@@ -9,7 +9,7 @@ Example DOM L2 event-handler:
 After the page is loaded, Weaveworld is initialized to handle events.
 
 
-### Low-level Event-handling ###
+## Low-level Event-handling ##
 
 
 In case of an event (not handled otherwise), Weaveworld tries to make a "type-binding", starting from the event target element through parent elements, it checks if one of the element (CSS) class name is registered as a type-handler.
@@ -41,11 +41,11 @@ W$TYPE={ $name:'Time',
 ```
 In case of clicking on `sup`, Weaveworld looks upward and finds the `div` with the `Time` (CSS) class, what have a registered _type-handler_ and have an onclick _rule definition_.
 
-### High-level Event-handling ###
+## High-level Event-handling ##
 
 In case of an event (not handled otherwise), Weaveworld tries to handle the event, starting from the event target element through parent elements. 
 
-If the element has a matching _event declaration_, that is an attribute that starts with `w:on:`... that follows the 'on' and the event name (e.g., `w:on:onclick`), then Weaveworld converts the event and tries to find the _event definition_ in the _type-handlers_ for that. 
+If the element has a matching _event declaration_, that is an attribute that starts with `w:on:`... that follows the 'on' and the event name (e.g., `w:on:onclick`), then Weaveworld converts the event and tries to find the _event handler definition_ for that name in _type-handlers_. 
 
 Let's see an example (See on [jsFiddle](https://jsfiddle.net/weaveworld/bag0kL8p/)):
 ```js
@@ -82,7 +82,7 @@ W$DATA={
   product:{ id: 123456, name: 'Bulb', amount:1 }
 };
 W$TYPE={ $name:'Amount',
-  amountChange: function(el,ev,arg){ 
+  changeAmount: function(el,ev,arg){ 
     this.amount+=arg.n;
   },
 }
@@ -92,16 +92,16 @@ W$TYPE={ $name:'Amount',
 <div class="Amount" w:the=product>
   <input type="number" name="amount" w:set:value="amount">
   <!--!w:css! div.Amount>input[name="amount"]{ max-width:4em; }--> 
-  <input type="button" class=wbutton value="+" w:on:onclick='amountChange{"n":1}'>
-  <input type="button" class=wbutton value="-" w:on:onclick='amountChange{"n":-1}'>
+  <input type="button" class=wbutton value="+" w:on:onclick='changeAmount{"n":1}'>
+  <input type="button" class=wbutton value="-" w:on:onclick='changeAmount{"n":-1}'>
 </div>
 ```
 
-For event definition, Weaveworld handles an optional `$arg` definition for the event. Firstly, the arguments are collected based on the current value, and after that arguments of the event declaration are added. 
+Weaveworld handles an optional `$arg` definition for the event. Firstly, the arguments are collected based on the current value (in case of a named element with value it is added, too), and after that arguments of the event declaration are added. 
 
 * `$arg` format: argument specifications, separated by _commas_,   
 where an argument specification
-    * _name_ (that is a shorthand for _name_=_name_
+    * _name_ (that is a shorthand for _name_=_name_) or
     * _name_`:`[template expression](doc-1-template.md#template-expressions) (based on the current value).
     
 It is suggested to use the redefined W$CALL function to make server (AJAX) calls. (It is also suggested to handle 'weaving' in the W$CALL for the element, that is to actualize the current data of the element.) Using the `$arg` feature, the arguments for the server call can be prepared.
@@ -121,7 +121,7 @@ W$TYPE={ $name:'Amount',
 ```
 
 
-### Event-handling, parameters and return values ###
+## Event-handling, parameters and return values ##
 
 **Event handler** ('rule') **parameters** (_el_,_ev_,_arg_):
 * `this`: current data (of data binding, which prototype is the type-handler).
@@ -137,9 +137,15 @@ W$TYPE={ $name:'Amount',
   * `false`: the event is partially handled, only the default action has to be performed.  
   (_cancelBubble_, _stopPropagation_)
 
-**Event declaration arguments** are given as a JSON object. If there's an (may empty) argument, and the HTML element has the `w:name` or `name` attribute, and has a `w:value` attribute or the `value` property, then it is added
-  * e.g., `<input type=text name=code w:on:onchange:action="{}">` - changing the input field causes an action with the argument 'code', which value is the value of the field.
-
+**Event declaration arguments** are given as JSON object. 
+  * Arguments are processed only if there's a (maybe empty object, i.e., `{}`) JSON value.
+  * Firstly, the _event name_`$arg` is processed. Format: argument specifications, separated by _commas_,   
+where an argument specification
+    * _name_ (that is a shorthand for _name_=_name_) or
+    * _name_`:`[template expression](doc-1-template.md#template-expressions) (based on the current value).
+  * The data of the JSON arguments are added.
+  * If the HTML element has the `w:name` or `name` attribute, and has a `w:value` attribute or the `value` property, then it is added.
+    * e.g., `<input type=text name=code w:on:onchange:action="{}">` - changing the input field to xy causes an action with the argument { code: "xy" }
 
 
 HTML element's event handling declarations can be the followings (in the order of execution):

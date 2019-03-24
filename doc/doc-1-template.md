@@ -1,11 +1,11 @@
-## Weaveworld (ῶ) - Templates ##
+# Weaveworld (ῶ) - Templates #
 
 Using Weaveworld, one can create HTML pages with example data, and can use it as templates, what will be actualized based on the current data.
 Initially, the value of W$DATA is used.   
 
 (During initialization, Weaveworld transforms DOM into a lightweight representation, what will be used during actualization. For production use, a filter program can create more compact pages without the examples.)
 
-### Template control ###
+## Template control ##
 
 Template engine can be controlled by specific element attributes, which are started by the `w:` prefix.    
 Most attributes are handled as macros.     
@@ -18,7 +18,7 @@ If there are one or more `{{` signs in the attribute, then they will be evaluate
 
 That means, that `"X"` and `"{{X}}"` are handled in the same way.
 
-### Template expressions ###
+## Template expressions ##
 Weaveworld has a very limited (but fast) expression language, which main goal is to access, transform and check parts of data. 
 Using "`[]` transformations", _full control_ (!) can be gained.   
 
@@ -65,7 +65,7 @@ Building blocks of expressions (from higher to lower precedence):
   * e.g., `... w:text="[toUppercase][toCountText]count"`
   
   
-### Basic transformations ###
+## Basic transformations ##
 
 Initially Weaveworld has the following built-in transformations:
 
@@ -78,14 +78,14 @@ Initially Weaveworld has the following built-in transformations:
 * `[{} FIELD_ASSIGNS]`: extracts values into an object. 
     * e.g., `<div w:the="[{}]"` ... - uses a new empty object
 
-### Type-binding (class, w:type) ###      
+## Type-binding (class, w:type) ##      
 
 Basic data-binding and event handling are performed by default.
 
 For advanced use, type-binding is needed.
 
   
-### Navigation, condition, iteration ###  
+## Navigation, condition, iteration ##  
   
 * **w:the** - navigates to the data, and that will be the current data.  
 Empty `w:the` means "the current data".
@@ -153,7 +153,7 @@ Using w:each there's an optional **w:when** attribute, what can filter the resul
 </div>
 ```
 
-### Property-like controls ###  
+## Property-like controls ##  
 
 * **w:text** - sets the element text (i.e., the `textContent`).
   * e.g., `<span w:text=code` ...
