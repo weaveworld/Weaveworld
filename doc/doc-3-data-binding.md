@@ -41,8 +41,8 @@ W$TYPE={ $name:'Item',
     * '-' - it **deletes** the current data from the list.
     * '.' - it **replaces** in the list the current data with the _object_.
     * '#' - it **replaces the list** with the _object_ (what has to be an array).
-    * '=' - it **replaces the current data** with the _object_; it <u>does perform</u> a w$refresh.
-    * '?' - it only loads **warnings**; it <u>does not perform</u> w$refresh.
+    * '=' - it **replaces the current data** with the _object_; it _does perform_ a w$refresh.
+    * '?' - it only loads **warnings**; it _does not perform_ w$refresh.
 * _object_: the data.
 
 The steps of `w$weave`:
