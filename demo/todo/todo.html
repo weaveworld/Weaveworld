@@ -8,20 +8,20 @@
 </head>
 <body>
   <div id="app">
-    <div class="ToDo" w:the>
+    <div class="ToDo" w:item>
       <img class="Logo" src="logo.jpg" alt="ῶ logo"/>
       <h1 class="ToDo-Header">Weaveworld To Do</h1>
       <div class="ToDo-Container">
         <div class="ToDo-Content" w:each=list>
-          <div class="ToDoItem Item" w:the>
+          <div class="ToDoItem Item" w:item>
             <p class="ToDoItem-Text" w:text=text>Todo text</p>
             <div class="ToDoItem-Delete" w:on:onclick='itemDelete'>-</div>
           </div>          
-          <div class="ToDoItem Item" w:the>
+          <div class="ToDoItem Item" w:item>
             <p class="ToDoItem-Text">Second Todo text</p>
             <div class="ToDoItem-Delete">-</div>
           </div>          
-          <form class="Item" w:the=[newTodo] w:type=Item w:name='itemAdd'>
+          <form class="Item" w:item=[newTodo] w:type=Item w:name='itemAdd'>
             <input type="text" class=winput w:name="text">
             <input type="submit" class="ToDo-Add" name=add value="+">
           </form>

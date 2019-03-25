@@ -29,8 +29,8 @@ In case of conditionals, values are considered false, if they're `undefined`, `n
 Building blocks of expressions (from higher to lower precedence):
 
 * **Field, value, expression**
-  * empty expression means **current data**, so empty `w:the` means "the current data"   
-    e.g., `<div w:the="">...` or `<div w:the>...`
+  * empty expression means **current data**, so empty `w:item` means "the current data"   
+    e.g., `<div w:item="">...` or `<div w:item>...`
   * **field** (containing letters, `$`, `@`, `_` and digits, and not started with digit)   
     e.g., `<input w:attr:maxlength="name$length"...`
   * **subfield**: A`.`B means subfield B of field A,   
@@ -76,7 +76,7 @@ Initially Weaveworld has the following built-in transformations:
 * `[1]`: conversion to `1` (in case of true-ish value) or `0` 
     * e.g., `<div w:data:open="[1]opened"` ...
 * `[{} FIELD_ASSIGNS]`: extracts values into an object. 
-    * e.g., `<div w:the="[{}]"` ... - uses a new empty object
+    * e.g., `<div w:item="[{}]"` ... - uses a new empty object
 
 ## Type-binding (class, w:type) ##      
 
@@ -87,15 +87,15 @@ For advanced use, type-binding is needed.
   
 ## Navigation, condition, iteration ##  
   
-* **w:the** - navigates to the data, and that will be the current data.  
-Empty `w:the` means "the current data".
-  * e.g., `<div w:the="group"` ... - uses the group field of the current data.
-  * e.g., `<div w:the` ... - uses the current data.
-  * e.g., `<body w:the=""` ... - uses (the base) W$DATA.
+* **w:item** - navigates to the data, and that will be the current data.  
+Empty `w:item` means "the current data".
+  * e.g., `<div w:item="group"` ... - uses the group field of the current data.
+  * e.g., `<div w:item` ... - uses the current data.
+  * e.g., `<body w:item=""` ... - uses (the base) W$DATA.
 
 The following example navigates to the `user` and uses its `email`.
 ```html
-<div w:the="user">
+<div w:item="user">
   <div w:text="email"></div>
 </div>
 ```
@@ -115,15 +115,15 @@ The following example navigates to the `user` and uses its `email`.
 
 * **w:each** - navigates to the value, and iterates on it.
 
-There basic form is the following: the outer element is marked by a `w:each`, and one or more inner elements are marked by an empty `w:the`, as "the current data". During iteration only the first marked element will be used as the template.
+There basic form is the following: the outer element is marked by a `w:each`, and one or more inner elements are marked by an empty `w:item`, as "the current data". During iteration only the first marked element will be used as the template.
 
 ```html
 <ul w:each=list>
-  <li class=Todo w:the>
+  <li class=Todo w:item>
     <button w:on:onclick=todoDelete>-</button> 
     <span  w:text=name>Todo 1</span>
   </li>
-  <li w:the>
+  <li w:item>
     <button>-</button> 
     <span>Todo 2</span>
   </li>
@@ -137,10 +137,10 @@ The general form of `w:each` is the next:
 * Elements after the last elements are used as _footers_.
 * An optional `w:else` can be used as replacement, if there's no iterable item at all.
 
-There's a shorthand version, where the w:each and the empty w:the is given by the same element, so that will be repeated.
+There's a shorthand version, where the w:each and the empty w:item is given by the same element, so that will be repeated.
 
 ```html
-<div w:each=list w:the>
+<div w:each=list w:item>
   <button>-</button><span w:text=name>item</span>
 </div>
 ```
@@ -148,7 +148,7 @@ There's a shorthand version, where the w:each and the empty w:the is given by th
 Using w:each there's an optional **w:when** attribute, what can filter the results.
 
 ```html
-<div w:each=list w:when="!deleted" w:the>
+<div w:each=list w:when="!deleted" w:item>
   <button>-</button><span w:text=name>item</span>
 </div>
 ```

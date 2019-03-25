@@ -63,7 +63,7 @@ W$TYPE={ $name:'Amount',
 ```
 
 ```html
-<div class="Amount" w:the=product>
+<div class="Amount" w:item=product>
   <span w:text=name>Product name</span>
   <!--!w:css! div.Amount>input[name="amount"]{ max-width:4em; }--> 
   <input type="number" name="amount" w:set:value="amount">
@@ -90,7 +90,7 @@ W$TYPE={ $name:'Amount',
 ```
 
 ```html
-<div class="Amount" w:the=product>
+<div class="Amount" w:item=product>
   <span w:text=name>Product name</span>
   <!--!w:css! div.Amount>input[name="amount"]{ max-width:4em; }--> 
   <input type="number" name="amount" w:set:value="amount">

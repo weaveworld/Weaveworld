@@ -60,16 +60,16 @@ Now in a browser, the actualized content appears.
 ```html
 ...
 <body class=w>
-  <div w:the>
+  <div w:item>
     <h3><span w:text=data.title>To Do List</span> 
       <sup w:text="({{list.length}})">(2)</sub>
     </h3>
     <ul w:each=list>
-      <li w:the>
+      <li w:item>
         <button>-</button> 
         <span w:text=name>Todo 1</span>
       </li>
-      <li w:the><button>-</button><span>Todo 2</span></li>
+      <li w:item><button>-</button><span>Todo 2</span></li>
     </ul>
     <blockquote>
       <form>
@@ -82,11 +82,11 @@ Now in a browser, the actualized content appears.
 ```
 
 1. `<body class=w>` - the "class=w" attribute provides that only the actualized content is shown.
-2. `<div w:the>` - "w:the" means _"the current data"_, so we use the current data.
+2. `<div w:item>` - "w:item" means _"the current data"_, so we use the current data.
 3. `<span w:text=data.title>` - the element's text content will be replaced to the referenced data.
 4. `<sup w:text="({{list.length}})">` - double curly brackets trigger macro replacement in the text.
 5. `<ul w:each=list>` - iterating over the data.
-6. `<li w:the>` - the first element will be the repeated template, and inside that the current data is the base data.
+6. `<li w:item>` - the first element will be the repeated template, and inside that the current data is the base data.
 
 ### Simple type-binding and event-handling  ###
 
@@ -95,22 +95,22 @@ Let's declare types of the DOM-parts using the `class` attribute (see `class=Tod
 ```html
 ...
 <body class=w>
-  <div class=TodoList w:the>
+  <div class=TodoList w:item>
     <h3><span w:text=data.title>To Do List</span>
       <sup w:text="({{list.length}})">(2)</sub>
     </h3>
     <ul w:each=list>
-      <li class=Todo w:the>
+      <li class=Todo w:item>
         <button w:on:onclick=todoDelete>-</button>
         <span w:text=name>Todo 1</span>
       </li>
-      <li w:the>
+      <li w:item>
         <button>-</button> 
         <span>Todo 2</span>
       </li>
     </ul>
     <blockquote>
-      <form w:name="todoAdd" w:the="[todoNew]">
+      <form w:name="todoAdd" w:item="[todoNew]">
         <input type=text class=winput w:name=name size=20>
         <button>+</button>
       </form>
@@ -124,7 +124,7 @@ Now we declare the event-handler for the "-" button (see the `w:on:onclick=todoD
 ```html
 ...
     <ul w:each=list>
-      <li class=Todo w:the>
+      <li class=Todo w:item>
         <button w:on:onclick=todoDelete>-</button> 
         <span w:text=name>Todo 1</span>
       </li>
@@ -208,7 +208,7 @@ Using the `winput` CSS class, the postfix `<sup></sup>` will indicate if there's
 ```html
 ...
     <blockquote>
-      <form w:name="todoAdd" w:the="[toNew]" w:type=Todo>
+      <form w:name="todoAdd" w:item="[toNew]" w:type=Todo>
         <input type=text class=winput w:name=name size=20><sup></sup>
         <button>+</button>
       </form>
@@ -261,22 +261,22 @@ The HTML:
   </script>
 </head>
 <body>
-  <div class=TodoList w:the>
+  <div class=TodoList w:item>
     <h3><span w:text=data.title>To Do List</span> 
       <sup w:text="({{list.length|'-'}})">(2)</sub>
     </h3>
     <ul w:each=list>
-      <li class=Todo w:the>
+      <li class=Todo w:item>
         <button w:on:onclick=todoDelete>-</button> 
         <span w:text=name>Todo 1</span>
       </li>  
-      <li w:the>
+      <li w:item>
         <button>-</button> 
         <span>Todo 2</span>
       </li>
     </ul>
     <blockquote>
-      <form w:name="todoAdd" w:the=[toNew] w:type=Todo>
+      <form w:name="todoAdd" w:item=[toNew] w:type=Todo>
         <input type=text class=winput w:name=name size=20><sup></sup>
         <button>+</button>
       </form>
