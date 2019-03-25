@@ -2,7 +2,7 @@
 
 (For web applications, "To Do" is like the famous "Hello, World!".)
 
-(See the example on [jsFiddle](https://jsfiddle.net/weaveworld/jtcwxyn9/).)
+(See the example on [jsFiddle](https://jsfiddle.net/weaveworld/pbqty0eg/).)
 
 This is the same application, as was created in Vue and React by [Sunil Sandhu](https://medium.com/@sunilsandhu), and in Angular by [Sam Borick](https://medium.com/@mibzman).
 * Part 1: https://medium.com/javascript-in-plain-english/i-created-the-exact-same-app-in-react-and-vue-here-are-the-differences-e9a1ae8077fd

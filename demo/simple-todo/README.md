@@ -2,7 +2,7 @@
 
 Using Weaveworld is extremely simple.
 
-(See the example on [jsFiddle](https://jsfiddle.net/weaveworld/0xc8kLah/).)
+(See the example on [jsFiddle](https://jsfiddle.net/weaveworld/t9hu8jL5/).)
 
 ### HTML with example data ###
 
