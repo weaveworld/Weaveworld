@@ -2,7 +2,7 @@
 
 First of all, the [DOM event-handling](https://www.w3.org/TR/DOM-Level-2-Events/events.html) can be used, and it overrides Weaveworld's event handling.
 
-Example DOM L2 event-handler:
+Example DOM Level 2 event-handler:
 ```html
 <button onclick="return handleClick(event)">OK</button>
 ```
@@ -39,7 +39,7 @@ W$TYPE={ $name:'Time',
   }
 }
 ```
-In case of clicking on `sup`, Weaveworld looks upward and finds the `div` with the `Time` (CSS) class, what have a registered _type-handler_ and have an onclick _rule definition_.
+In case of clicking on `sup`, Weaveworld looks upward and finds the `div` with the `Time` (CSS) class, what has a registered _type-handler_ and have an onclick _rule definition_.
 
 ## High-level Event-handling ##
 
@@ -53,10 +53,10 @@ W$DATA={
   product:{ id: 123456, name: 'Bulb', amount:1, }
 };
 W$TYPE={ $name:'Amount',
-  increaseAmount: function(el,ev){ 
+  increaseAmount: function(el,ev){
     ++this.amount;
   },
-  decraseAmount: function(el,ev){ 
+  decraseAmount: function(el,ev){
     --this.amount;
   },
 }
@@ -117,7 +117,7 @@ W$TYPE={ $name:'Amount',
   changeAmount: function(el,ev,arg){ 
     this.amount+=arg.n;
     console.log(arg);
-    // W$CALL('changeAmount', arg,el)
+    // W$CALL('changeAmount',arg, el)
   },
 }
 ```
@@ -135,14 +135,14 @@ W$TYPE={ $name:'Amount',
 **Event handler** ('rule') **return value**:
   * `undefined` (e.g., no return statement at all): the event is handled.
   * `null`: the event is not handled, so Weaveworld has to keep on to look for the handler.  
-  (_preventDefault_, _cancelBubble_, _stopPropagation_, )
+  (_preventDefault_, _cancelBubble_, _stopPropagation_)
   * `false`: the event is partially handled, only the default action has to be performed.  
   (_cancelBubble_, _stopPropagation_)
 
 **Event declaration arguments** are given as JSON object. 
   * Arguments are processed only if there's a (maybe empty object, i.e., `{}`) JSON value.
   * Firstly, the _event name_`$arg` is processed. Format: argument specifications, separated by _commas_,   
-where an argument specification
+where an argument specification is
     * _name_ (that is a shorthand for _name_=_name_) or
     * _name_`:`[template expression](doc-1-template.md#template-expressions) (based on the current value).
   * The data of the JSON arguments are added.
@@ -159,8 +159,9 @@ HTML element's event handling declarations can be the followings (in the order o
   * e.g., `<span w:on:onclick:data='{"open":null}' w:on:onclick="">Open</span>` - removes the data-open attribute
 * `w:on:X:set='{`_json_`}'` - directly sets **properties of the current data** (of data-binding)
   * e.g., `<span w:on:onclick:set='{"open":1}' w:on:onclick="">Open</span>` - sets the current data's "open" property to 1
-* `w:on:action='{`_json_`}'` - creates an **action** in the _(re)action context_
+* `w:on:X:action='{`_json_`}'` - creates an **action** in the _(re)action context_
   * e.g., `<span w:on:onclick:action='{"open":1}' w:on:onclick="">Open</span>` - triggers an action with the "open:1" argument
-* `w:on:X='`<sub>[</sub>_name_<sub>]</sub><sub>[</sub>`{`_json_`}`<sub>]</sub> - event handling declaration
+* `w:on:X='`<sub>[</sub>_name_<sub>]</sub><sub>[</sub>`{`_json_`}`<sub>]</sub> - **event handler declaration**
   * _name_: the redefined name
-  * if the _name_ is empty, that means that the event is handled, no further event handling is needed
+    * if the _name_ is empty, that means that the event is handled, no further event handling is needed
+    * if the _name_ is `default`, that means that the event is partially handled, no further event handling is needed, but the default action has to be performed

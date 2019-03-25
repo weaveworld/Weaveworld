@@ -1,4 +1,4 @@
-## To Do comparision ##
+## To Do comparison ##
 
 (For web applications, "To Do" is like the famous "Hello, World!".)
 

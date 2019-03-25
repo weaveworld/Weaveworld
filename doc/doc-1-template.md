@@ -51,7 +51,7 @@ Building blocks of expressions (from higher to lower precedence):
   * e.g., `<div w:show="code!'a'!'b'"` ... - the code is neither 'a' nor 'b'
 
 * **"or" (`|` sign)**: A<sub>{</sub>`|`B<sub>}</sub>    
-  The first value, what is considered as true, otherwise false.
+  The first true-ish value or false.
   * e.g., `... w:show="code='x'='y'|isAdmin|pass"` ...: if the code is 'x' or 'y', or isAdmin or pass is considered as true
   
 * **Conditional expression (`?` and `:`)**: A<sub>[</sub>?X<sub>]</sub><sub>[</sub>:Y<sub>]</sub>     
@@ -61,7 +61,7 @@ Building blocks of expressions (from higher to lower precedence):
    
 * **Transformation (prefix `[` and `]`)**: `[`TR <sub>[</sub>PATTERN<sub>]</sub>`]`V    
   Uses TR transformation on the V value. An optional pattern literal can be given.  
-  Transformations are mostly handled by type-handlers.
+  Transformations are mostly defined in type-handlers.
   * e.g., `... w:text="[toUppercase][toCountText]count"`
   
   
@@ -69,11 +69,11 @@ Building blocks of expressions (from higher to lower precedence):
 
 Initially Weaveworld has the following built-in transformations:
 
-* `[?]`: conversion to true or false
+* `[?]`: conversion to `true` or `false`
     * e.g., `<div w:attr:contenteditable="[?]code$isEditable"` ...
-* `[??]`: conversion to HTML conditional, i.e., "" or null
+* `[??]`: conversion to HTML conditional, i.e., `""` or `null`
     * e.g., `<input type=radio w:attr:checked="[??]code='1'" value="1"` ...
-* `[1]`: conversion to 1 (in case of true-ish value) or 0 
+* `[1]`: conversion to `1` (in case of true-ish value) or `0` 
     * e.g., `<div w:data:open="[1]opened"` ...
 * `[{} FIELD_ASSIGNS]`: extracts values into an object. 
     * e.g., `<div w:the="[{}]"` ... - uses a new empty object
@@ -100,7 +100,7 @@ The following example navigates to the `user` and uses its `email`.
 </div>
 ```
 
-* **w:if** - the content is used only if the value is true-ish.
+* **w:if** - child elements of the content are used only if the value is true-ish.
 
   * An optional `w:else` can be given for an alternate content.
 
@@ -132,9 +132,9 @@ There basic form is the following: the outer element is marked by a `w:each`, an
 
 The general form of `w:each` is the next:
 * The elements before the first item are the _headers_.
-* The first item is used as the _iterated pattern_.
-* The elements between the first and second items are used as _separators_.
-* The elements after the last elements are used as _footers_.
+* First item is used as the _iterated pattern_.
+* Elements between the first and second items are used as _separators_.
+* Elements after the last elements are used as _footers_.
 * An optional `w:else` can be used as replacement, if there's no iterable item at all.
 
 There's a shorthand version, where the w:each and the empty w:the is given by the same element, so that will be repeated.

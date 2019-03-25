@@ -32,12 +32,12 @@ The page can be opened by a browser and can be designed using some classes and C
     </ul>
     <blockquote>
       <form>
-        <input type=text name=name> 
+        <input type=text name=name>
         <button>+</button>
       </form>
     </blockquote>
   </div>
-</body></html>  
+</body></html>
 ```
 
 ### Simple data-binding ###
@@ -45,7 +45,7 @@ The page can be opened by a browser and can be designed using some classes and C
 Now, we put some data into the `simple-todo.js` file.
 
 ```js
-W$DATA={ 
+W$DATA={
   data:{ title:'My list' },
   list: [
 	  { name: 'clean the house' },
@@ -96,12 +96,12 @@ Let's declare types of the DOM-parts using the `class` attribute (see `class=Tod
 ...
 <body class=w>
   <div class=TodoList w:the>
-    <h3><span w:text=data.title>To Do List</span> 
+    <h3><span w:text=data.title>To Do List</span>
       <sup w:text="({{list.length}})">(2)</sub>
     </h3>
     <ul w:each=list>
       <li class=Todo w:the>
-        <button w:on:onclick=todoDelete>-</button> 
+        <button w:on:onclick=todoDelete>-</button>
         <span w:text=name>Todo 1</span>
       </li>
       <li w:the>
@@ -111,7 +111,7 @@ Let's declare types of the DOM-parts using the `class` attribute (see `class=Tod
     </ul>
     <blockquote>
       <form w:name="todoAdd" w:the="[todoNew]">
-        <input type=text class=winput w:name=name size=20> 
+        <input type=text class=winput w:name=name size=20>
         <button>+</button>
       </form>
     </blockquote>
@@ -178,8 +178,8 @@ In the HTML, we use the `w:name` 'super-template' technique for the form. The ev
 
 ### Prototype-binding ###
 
-Let's extend a little bit the '.js' file. The `toNew` transformation of the `TodoList` type-handler creates a new (now empty) item.
-In the `Todo` type-handler let's put  the `name$required:true` and `name$length:64` fields.
+Let's extend the '.js' file. The `toNew` transformation of the `TodoList` type-handler creates a new (now empty) item.
+In the `Todo` type-handler let's put the `name$required:true` and `name$length:64` fields.
 
 ```js
 ...
@@ -242,7 +242,7 @@ W$TYPE={ $name:'Todo',
   name$required: true,
   name$length: 64,
   todoDelete: function(el,ev,arg){ 
-    // var list=w$list(el); list.splice(list.indexOf(this),1)  // using JS     
+    // var list=w$list(el); list.splice(list.indexOf(this),1)  // using JS
     w$weave(el,'-');    // using "weaving"
   },      
 };
@@ -256,9 +256,9 @@ The HTML:
   <script src="https://cdn.jsdelivr.net/gh/weaveworld/Weaveworld/w.min.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/weaveworld/Weaveworld/w.css" rel="stylesheet"/>
   <script src="simple-todo.js"></script>
-  <script>  
+  <script>
     // W$DATA=undefined
-  </script>  
+  </script>
 </head>
 <body>
   <div class=TodoList w:the>
