@@ -1,0 +1,10 @@
+---
+ name: Weaveworld Simple To Do
+ authors:
+   - Weaveworld
+   - 
+ resources:
+   - https://cdn.jsdelivr.net/gh/weaveworld/Weaveworld@0.11/w.min.js
+   - https://cdn.jsdelivr.net/gh/weaveworld/Weaveworld@0.11/w.css
+ normalize_css: no
+ load_type: d
