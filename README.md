@@ -41,8 +41,9 @@ Weaveworld (ῶ) **main features**:
 * [Two-way data-binding](doc/doc-3-data-binding.md): change of data results DOM-element update.
   * ['Weaving'](doc/doc-3-data-binding.md#weaving---wweave) - `w$refresh`, `w$weave`; [Server call](doc/doc-3-data-binding.md#server-call) - `W$CALL`
   * [Initial data](doc/doc-3-data-binding.md#initial-data) - `W$DATA`, `W$START`; [Initialization](doc/doc-3-data-binding.md#initializing) - `W$ONLOAD`
-* "**Type-handlers**": data derivation, transformation, view control, etc.
-  * `class`, `w:type`
+* "[Type-handlers](doc/doc-4-type-handlers.md#)": data derivation, transformation, view control, etc.
+  * [Type-binding](doc/doc-4-type-handlers.md#class) - `class`, [Prototype type-binding](doc/doc-4-type-handlers.md#wtype) - `w:type`
+  * Type-handler registration - `W$TYPE`, Type-handler rules
 * "**Super-templates**": setting defaults based on type-handler rules.
   * `w:name`, `w:named`
 * **Validation**: basic methods to check and display validation errors.
@@ -50,5 +51,5 @@ Weaveworld (ῶ) **main features**:
 * **Access-control**: levels of view, update, delete, etc.
   * `w:for`, `w:show:for`, `w:enable:for`
 * **(Re)action contexts**, that means complex reactions for events.
-  * `w:at`, `at$`_X_
+  * `w:at`, `$at$`_X_
 * Basic **localization**: string translation using a dictionary.
