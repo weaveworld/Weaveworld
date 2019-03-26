@@ -60,12 +60,50 @@ Building blocks of expressions (from higher to lower precedence):
   * e.g., `... w:text="list.length:'(none)'"...`: default for the value
    
 * **Transformation (prefix `[` and `]`)**: `[`TR <sub>[</sub>PATTERN<sub>]</sub>`]`V    
-  Uses TR transformation on the V value. An optional pattern literal can be given.  
+  Uses TR transformation on the V value. An optional literal pattern can be given.  
   Transformations are mostly defined in type-handlers.
   * e.g., `... w:text="[toUppercase][toCountText]count"`
   
-  
-## Basic transformations ##
+
+## Transformations ##
+
+Transformation *search order*:
+
+**1.** Type-handlers of the element and its parents.
+
+A transformation can be defined as a function 'rule' of the typehandler. Parameters are:
+* _el_: the processed element. (Thus the element attributes or content can be changed).
+* _v_: the value to be changed.
+* _p_: the (optional) literal pattern.
+
+```js
+W$TYPE={ $name:'Order',
+    toFixed: function(el,v,p){
+      return String(v.toFixed(p?Number(p):0));  
+    },
+}
+```
+```html
+<div class=Order>
+  ... <span w:text="${{[toFixed 2]price}}">199.99</span> ...
+```
+
+**2.** Basic transformations. (See below.)
+
+
+**3.** Global object's functions. Parameters: _value_ and optional literal _pattern_.
+
+```js
+function toIndentation(v,p){ 
+  return ((v-1)*10)+"px";
+} 
+```
+```html
+<a w:style:margin-left="[toIndentation]level" 
+  w:attr:href="[encodeURIComponent]url">...
+```
+
+### Basic transformations ###
 
 Initially Weaveworld has the following built-in transformations:
 
@@ -75,10 +113,13 @@ Initially Weaveworld has the following built-in transformations:
   * `true`: converting to `true` or `false`    
     * e.g., `<div w:attr:contenteditable="[? true]code$isEditable"` ...
   * `'`_string_`'`: conversion to the _string_ or `null`
+    * e.g., `<input type=radio w:attr:checked="[? 'checked']code='1'" value="1"` ...
   * `''` or no pattern: conversion to HTML conditional, i.e., `""` or `null`
-    * e.g., `<input type=radio w:attr:checked="[??]code='1'" value="1"` ...
+    * e.g., `<input type=radio w:attr:checked="[?]code='1'" value="1"` ...
+  * (This transformation is performed via `w$is` utility function, so it is redefinable.)    
 * `[! `<sub>[</sub>PATTERN<sub>]</sub>`]`: complementer condition conversion. (Same as `[?]`, with the complementer value, but with same pattern.)
   * e.g., `<div w:attr:contenteditable="[! true]comment$isLocked"` ...
+  * (This transformation is performed via `w$toggle` utility function, so it is redefinable.)    
 * `[{} `<sub>[</sub>FIELD_ASSIGNS<sub>]</sub>`]`: extracts values into an object. 
     * e.g., `<div w:item="[{}]"` ... - uses a new empty object
 

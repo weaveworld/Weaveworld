@@ -30,7 +30,7 @@ Weaveworld (ῶ) **main features**:
 * [Template](doc/doc-1-template.md) engine: example HTML is filled with current data.  
   * [Expression](doc/doc-1-template.md#template-expressions): 
     * current data, (sub)fields, `X\A.B.C`, `true`, `false`, `null`, `undefined`, `0`, `1`, `""`, `''`, expressions
-    * `!`, `= !`, `|`, `? :` `[ ]`
+    * `!`, `= !`, `|`, `? :`, `[ ]`, [Transformations](doc/doc-1-template.md#transformations)
   * [Navigation](doc/doc-1-template.md#navigation-condition-iteration): `w:item`, `w:each` (`w:when`), `w:if`, (`w:else`)
   * [Element](doc/doc-1-template.md#property-like-controls) properties: `w:attr:X`, `w:data:X`, `w:style:X`, `w:set:X`, `w:value`, `w:show`, `w:warning`
 * [Event-handling](doc/doc-2-event.md): events can be handled in so called "type-handlers" (simple JS objects).
@@ -53,3 +53,5 @@ Weaveworld (ῶ) **main features**:
 * **(Re)action contexts**, that means complex reactions for events.
   * `w:at`, `$at$`_X_
 * Basic **localization**: string translation using a dictionary.
+* **Utility functions**
+* **Customization**: practically everything can be refedined.
