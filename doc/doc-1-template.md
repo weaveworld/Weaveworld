@@ -69,13 +69,17 @@ Building blocks of expressions (from higher to lower precedence):
 
 Initially Weaveworld has the following built-in transformations:
 
-* `[?]`: conversion to `true` or `false`
-    * e.g., `<div w:attr:contenteditable="[?]code$isEditable"` ...
-* `[??]`: conversion to HTML conditional, i.e., `""` or `null`
-    * e.g., `<input type=radio w:attr:checked="[??]code='1'" value="1"` ...
-* `[1]`: conversion to `1` (in case of true-ish value) or `0` 
+* `[? `<sub>[</sub>PATTERN<sub>]</sub>`]`: condition conversion, where the optional pattern can be:
+  * `1`: converting to `1` or `0`    
     * e.g., `<div w:data:open="[1]opened"` ...
-* `[{} FIELD_ASSIGNS]`: extracts values into an object. 
+  * `true`: converting to `true` or `false`    
+    * e.g., `<div w:attr:contenteditable="[? true]code$isEditable"` ...
+  * `'`_string_`'`: conversion to the _string_ or `null`
+  * `''` or no pattern: conversion to HTML conditional, i.e., `""` or `null`
+    * e.g., `<input type=radio w:attr:checked="[??]code='1'" value="1"` ...
+* `[! `<sub>[</sub>PATTERN<sub>]</sub>`]`: complementer condition conversion. (Same as `[?]`, with the complementer value, but with same pattern.)
+  * e.g., `<div w:attr:contenteditable="[! true]comment$isLocked"` ...
+* `[{} `<sub>[</sub>FIELD_ASSIGNS<sub>]</sub>`]`: extracts values into an object. 
     * e.g., `<div w:item="[{}]"` ... - uses a new empty object
 
 ## Type-binding (class, w:type) ##      
