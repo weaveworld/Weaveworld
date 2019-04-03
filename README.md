@@ -52,7 +52,7 @@ Weaveworld (ῶ) **main features**:
   * `w:name`, `w:named`
 * **Access-control**: levels of view, update, delete, etc.
   * `w:for`, `w:show:for`, `w:enable:for`
-* **(Re)action contexts**, that means complex reactions for events.
+* **(Re)action contexts**: complex reactions for events.
   * `w:at`, `$at$`_X_
 * Basic **localization**: string translation using a dictionary.
 * **Utility functions**
