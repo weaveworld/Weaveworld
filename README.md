@@ -44,14 +44,16 @@ Weaveworld (ῶ) **main features**:
 * "[Type-handlers](doc/doc-4-type-handlers.md#)": data derivation, transformation, view control, etc.
   * [Type-binding](doc/doc-4-type-handlers.md#class) - `class`, [Prototype type-binding](doc/doc-4-type-handlers.md#wtype) - `w:type`
   * [Type-handler registration](doc/doc-4-type-handlers.md#type-handler-registration) - `W$TYPE`, [Type-handler rules](doc/doc-4-type-handlers.md#type-handler-rules)
+* **Validation**: basic methods to check and display validation errors.
+  * _X_`$warning`, `_w`, `_w`$_X_
+  * `w:warning`
+  * _X_`$check`, _X_`$valid`  
 * "**Super-templates**": setting defaults based on type-handler rules.
   * `w:name`, `w:named`
-* **Validation**: basic methods to check and display validation errors.
-  * `w:warning`
 * **Access-control**: levels of view, update, delete, etc.
   * `w:for`, `w:show:for`, `w:enable:for`
 * **(Re)action contexts**, that means complex reactions for events.
   * `w:at`, `$at$`_X_
 * Basic **localization**: string translation using a dictionary.
 * **Utility functions**
-* **Customization**: practically everything can be refedined.
+* **Customization**: practically everything can be redefined.
