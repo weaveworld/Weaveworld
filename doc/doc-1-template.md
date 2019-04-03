@@ -72,7 +72,7 @@ Transformation *search order*:
 **1.** Type-handlers of the element and its parents.
 
 A transformation can be defined as a function 'rule' of the typehandler. Parameters are:
-* _el_: the processed element. (Thus the element attributes or content can be changed).
+* _el_: the processed element. (Thus the element attributes or the content can be changed!)
 * _v_: the value to be changed.
 * _p_: the (optional) literal pattern.
 
@@ -107,21 +107,24 @@ function toIndentation(v,p){
 
 Initially Weaveworld has the following built-in transformations:
 
-* `[? `<sub>[</sub>PATTERN<sub>]</sub>`]`: condition conversion, where the optional pattern can be:
-  * `1`: converting to `1` or `0`    
-    * e.g., `<div w:data:open="[1]opened"` ...
-  * `true`: converting to `true` or `false`    
-    * e.g., `<div w:attr:contenteditable="[? true]code$isEditable"` ...
-  * `'`_string_`'`: conversion to the _string_ or `null`
-    * e.g., `<input type=radio w:attr:checked="[? 'checked']code='1'" value="1"` ...
-  * `''` or no pattern: conversion to HTML conditional, i.e., `""` or `null`
-    * e.g., `<input type=radio w:attr:checked="[?]code='1'" value="1"` ...
-  * (This transformation is performed via `w$is` utility function, so it is redefinable.)    
-* `[! `<sub>[</sub>PATTERN<sub>]</sub>`]`: complementer condition conversion. (Same as `[?]`, with the complementer value, but with same pattern.)
-  * e.g., `<div w:attr:contenteditable="[! true]comment$isLocked"` ...
-  * (This transformation is performed via `w$toggle` utility function, so it is redefinable.)    
+* condition-conversion
+  * `[?]`: condition conversion to `true` or `false`    
+    * e.g., `<div w:attr:contenteditable="[?]code$isEditable"` ...
+    * e.g., `<div w:show="[?]details"` ...   
+  * `[?? `<sub>[</sub>`'`_string_`'`<sub>]</sub>`]`: conversion to "HTML conditional", that is the _string_ (default is empty string) or `null`.
+     * e.g., `<input type=radio w:attr:checked="[??]code='1'" value="1"` ...
+     * e.g., `<input type=radio w:attr:checked="[?? 'checked']code='1'" value="1"` ...  
+  * `[?1]`: conversion to `1` or `0`
+    * e.g., `<div w:data:open="[?1]opened"` ...
+* complementer condition-conversion
+  * `[!]`: complementer condition to `false` or `true`.
+    * e.g., `<div w:attr:contenteditable="[!]comment$isLocked"` ...
+  * `[!! `<sub>[</sub>`'`_string_`'`<sub>]</sub>`]`: conversion to "HTML conditional", that is `null` or the _string_ (default is empty string).
+  * `[!1]`: conversion to `0` or `1`.
 * `[{} `<sub>[</sub>FIELD_ASSIGNS<sub>]</sub>`]`: extracts values into an object. 
     * e.g., `<div w:item="[{}]"` ... - uses a new empty object
+
+(Transformations are performed via `w$is` and `w$toggle` redefinable utility functions)
 
 ## Type-binding (class, w:type) ##      
 
@@ -133,7 +136,7 @@ For advanced use, type-binding is needed.
 ## Navigation, condition, iteration ##  
   
 * **w:item** - navigates to the data, and that will be the current data.  
-Empty `w:item` means "the current data".
+Empty `w:item` means "current data".
   * e.g., `<div w:item="group"` ... - uses the group field of the current data.
   * e.g., `<div w:item` ... - uses the current data.
   * e.g., `<body w:item=""` ... - uses (the base) W$DATA.
