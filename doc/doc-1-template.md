@@ -71,7 +71,7 @@ Transformation *search order*:
 
 **1.** Type-handlers of the element and its parents.
 
-A transformation can be defined as a function 'rule' of the typehandler. Parameters are:
+A transformation can be defined as a function "rule" in the typehandler. Parameters are:
 * _el_: the processed element. (Thus the element attributes or the content can be changed!)
 * _v_: the value to be changed.
 * _p_: the (optional) literal pattern.

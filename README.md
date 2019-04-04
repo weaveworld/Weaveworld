@@ -2,9 +2,9 @@
 
 **Weaveworld (ῶ)** is an experimental framework for interactive web applications, to provide the theoretically shortest (!) representation for "data-intensive" applications (forms, etc.) using simple HTML and JS techniques, without loss of readability. Only basic (!) HTML/CSS/JavaScript(ES6 or ES5) skills are required to create applications.
 
-**License**: it is _free_ to use, but _**not** open-source_ during its experimental phase (i.e., it is not allowed to use elsewhere parts or modified versions of the source, however the framework is totally customizable and redefinable). Weaveworld is about the one tenth of the Weaveworld-ONCE web framework. Patent pending for the "type-binding" technique. See: [licence](LICENSE).
+**License**: it is _free_ to use, but _**not** open-source_ during its experimental phase (i.e., it is not allowed to use elsewhere parts or modified versions of the source), however the framework is totally customizable and redefinable. Weaveworld is about the one tenth of the Weaveworld-ONCE web framework. Patent pending for the "type-binding" technique. See: [licence](LICENSE).
 
-For comparison, there's a [simplified demo page](demo/todo), which functional equivalent versions are also in Vue, React and Angular.    
+For comparison, there's a [simplified demo page](demo/todo), which functional equivalent versions are also available in Vue, React and Angular.    
 In case of full-scale business web applications, the code based on Weaveworld is about 2-4 times smaller and simpler than the usual methods.
 
 Usage (where VERSION: MAJOR.MINOR.DATE; suggested use: MAJOR.MINOR, e.g., .../`Weaveworld@0.11/`...)
@@ -31,6 +31,7 @@ Weaveworld (ῶ) **main features**:
   * [Expression](doc/doc-1-template.md#template-expressions): 
     * current data, (sub)fields, `X\A.B.C`, `true`, `false`, `null`, `undefined`, `0`, `1`, `""`, `''`, expressions
     * `!`, `= !`, `|`, `? :`, `[ ]`, [Transformations](doc/doc-1-template.md#transformations)
+  * [Transformations](doc/doc-1-template.md#transformations), `[?]`, `[??]`, `[?1]`, `[!]`, `[!!]`, `[!1]`, `[{}]`
   * [Navigation](doc/doc-1-template.md#navigation-condition-iteration): `w:item`, `w:each` (`w:when`), `w:if`, (`w:else`)
   * [Element](doc/doc-1-template.md#property-like-controls) properties: `w:attr:X`, `w:data:X`, `w:style:X`, `w:set:X`, `w:value`, `w:show`, `w:warning`
 * [Event-handling](doc/doc-2-event.md): events can be handled in so called "type-handlers" (simple JS objects).
