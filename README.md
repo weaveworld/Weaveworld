@@ -7,7 +7,7 @@
 For comparison, there's a [simplified demo page](demo/todo), which functional equivalent versions are also available in Vue, React and Angular.    
 In case of full-scale business web applications, the code based on Weaveworld is about 2-4 times smaller and simpler than the usual methods.
 
-Usage (where VERSION: MAJOR.MINOR.DATE; suggested use: MAJOR.MINOR, e.g., .../`Weaveworld@0.11/`...)
+Usage (where VERSION: MAJOR.MINOR.DATE; suggested use: MAJOR.MINOR, e.g., .../`Weaveworld@0.12/`...)
 ```html
   <script src="https://cdn.jsdelivr.net/gh/weaveworld/Weaveworld@VERSION/w.min.js"></script>
   <link href="https://cdn.jsdelivr.net/gh/weaveworld/Weaveworld@VERSION/w.css" rel="stylesheet"/>
