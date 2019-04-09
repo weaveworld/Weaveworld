@@ -1,93 +1,58 @@
 .wmenu {
-	xdisplay:inline-block;  xdisplay:none;
   box-shadow:1px 1px 2px rgba(0, 0, 0, 0.2);
   border:1px solid #E6E6E6;
   z-index:10000;
 }
 .wmenuitem .wmenu{ display:none; }
-ul.wmenu{
-  color:#333; background-color:#f4f4f4;  
-  margin:0 0; padding:2px 3px;
-}
-ul.wmenu ul{
-  color:#333; background:#F4F4F4;  
-  margin:0px; padding:2px 3px;
-}
+ul.wmenu{    color:#333; background-color:#f4f4f4; margin:0; padding:2px 3px; }
+ul.wmenu ul{ color:#333; background-color:#f4f4f4; margin:0; padding:2px 3px; }
 .wmenu li {
-  position: relative;
-	list-style: none;
-  margin: 0px;
-  padding: 5px 3px;
-  border-bottom: 1px solid #CCC;
-  cursor: pointer;
-  white-space: nowrap;
+  position:relative; list-style:none;
+  margin: 0; padding: 5px 3px;
+  border-bottom: 1px solid #ccc;
+  cursor:pointer;
+  white-space:nowrap;
 }
-.wmenu li.disable {
-  opacity: .3;
-}
-.wmenu li:hover{
-  color:#F2F2F2; background-color:#003366;  
-}
-.wmenu li.wmenuitem-selected{
-  color:#F2F2F2; background-color:#003366;  
-}
-.wmenu .icon {
-  position: absolute; left: 0px; top: 3px;
-	width: 20px;  height: 20px;  
-}
+.wmenu li.disable{ opacity: .3; }
+.wmenu li:hover{              color:#F2F2F2; background-color:#003366; }
+.wmenu li.wmenuitem-selected{ color:#F2F2F2; background-color:#003366; }
+.wmenu .icon{ position:absolute; left:0px; top:3px; width:20px; height:20px; }
 
 [tooltip]:before { position:absolute; content:attr(tooltip); opacity:0;
     transition: all 0.15s ease;
     padding: 10px;
     color: #333; border-radius: 10px; box-shadow: 2px 2px 1px silver;    
 }
-[tooltip]:hover:before { opacity: 1;
-    background: yellow;
-    margin-top: 10px;
-    margin-left: 20px;    
+[tooltip]:hover:before { opacity:1; background:yellow;
+    margin-top:10px; margin-left:20px;    
 }
-[tooltip]:not([tooltip-persistent]):before {
-    pointer-events: none;
-}
+[tooltip]:not([tooltip-persistent]):before { pointer-events: none; }
 
 .w{ display:none !important; }
-
-.wglass{ opacity:0.2; background-color:#ccc; }
 
 ._w{ color:red; }
 ._w:not([w:validity]){ display:none; }
 
-.wbutton {
-  font-size:115%;
-  color: #111;
-  opacity:0.7;
-  text-align:center;
-  background-color:#eee;
-  text-decoration:none;
-  border-radius:5px;
-  border:1px;
-  border-color:#bbb;
-  border-style:solid;
+.wbutton{ color: #222; background-color:#eee; opacity:0.7; 
+  font-size:115%; text-align:center; text-decoration:none;
+  border-radius:5px; border:1px; border-color:#bbb; border-style:solid;
   padding: 0 0.7ex;
   user-select: none;  
 }
 .wbutton:disabled{ color:#888; background-color:#eee; border-color:#eee; cursor:default; } 
-.wbutton:not(:disabled):hover{
-  background-color: #f0f0f0;
-  color:black !important;
-  border-color:#aaa;
-  cursor:pointer;
-  _font-weight: 900 !important;
-  opacity:1 !important;
+.wbutton:not(:disabled):hover{ color:black !important; background-color: #f0f0f0; opacity:1 !important; 
+  border-color:#aaa; cursor:pointer;  
 } 
 input.winput::placeholder{ opacity:0.7; font-style: italic; }
 input.winput[readonly],select.winput[readonly]{ opacity:0.5; }
-input.winput:invalid,select.winput:invalid{ border: 2px solid #bb0000; }
-input.winput:invalid+sup:after,select.winput:invalid+sup:after {
+.winput:invalid{ border: 2px solid #bb0000; }
+.winput:invalid+sup:after{
   content:'✖'; color:red; font-weight:bold; padding-left: 0.3ex; position: relative; top: -0.5em; 
 }
-input.winput:not(:invalid)+sup:after,select.winput:not(:invalid)+sup:after{
+.winput:not(:invalid)+sup:after{
   content:'✓'; color:green; font-weight:bold; padding-left: 0.3ex; position: relative; top: -0.5em;
 }
 
-wglass{ position:fixed; top:0; left:0; width:100%; height:100%; margin:0; padding:0; z-index:10; }
+.wglass{ opacity:0.2; background-color:#ccc; 
+  position:fixed; width:100%; height:100%; top:0px; left:0px; z-index:2147483647; 
+}
