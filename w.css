@@ -52,6 +52,8 @@ ul.wmenu ul{
 
 .w{ display:none !important; }
 
+.wglass{ opacity:0.2; background-color:#ccc; }
+
 ._w{ color:red; }
 ._w:not([w:validity]){ display:none; }
 
@@ -79,12 +81,12 @@ ul.wmenu ul{
   opacity:1 !important;
 } 
 input.winput::placeholder{ opacity:0.7; font-style: italic; }
-input.winput[readonly]{ opacity:0.5; }
-input.winput:invalid{ border: 2px solid #bb0000; }
-input.winput:invalid+sup:after {
+input.winput[readonly],select.winput[readonly]{ opacity:0.5; }
+input.winput:invalid,select.winput:invalid{ border: 2px solid #bb0000; }
+input.winput:invalid+sup:after,select.winput:invalid+sup:after {
   content:'✖'; color:red; font-weight:bold; padding-left: 0.3ex; position: relative; top: -0.5em; 
 }
-input.winput:not(:invalid)+sup:after {
+input.winput:not(:invalid)+sup:after,select.winput:not(:invalid)+sup:after{
   content:'✓'; color:green; font-weight:bold; padding-left: 0.3ex; position: relative; top: -0.5em;
 }
 
