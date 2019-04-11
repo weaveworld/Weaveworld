@@ -1,6 +1,6 @@
 # Weaveworld (ῶ) - Events #
 
-First of all, the [DOM event-handling](https://www.w3.org/TR/DOM-Level-2-Events/events.html) can be used, and it overrides Weaveworld's event handling.
+First of all, [DOM event-handling](https://www.w3.org/TR/DOM-Level-2-Events/events.html) can be used, which overrides Weaveworld's event handling.
 
 Example DOM Level 2 event-handler:
 ```html
@@ -8,49 +8,17 @@ Example DOM Level 2 event-handler:
 ```
 After the page is loaded, Weaveworld is initialized to handle events.
 
-
-## Low-level Event-handling ##
-
-
-In case of an event (not handled otherwise), Weaveworld tries to make a "type-binding", starting from the event target element through parent elements, it checks if one of the element (CSS) class name is registered as a type-handler.
-
-Let's see the following element (see on [jsFiddle](https://jsfiddle.net/weaveworld/630xncta/)):
-```html
-<div class="Time t-container">
-  <input type="number" name="hour" value=23
-    ><sup class=wbutton name="x-hour">X</sup>
-  <input type="number" name="minute" value=59
-    ><sup class=wbutton name="x-minute">X</sup>
-  <input type="number" name="second" value=59
-    ><sup class=wbutton name="x-second">X</sup>
-</div> 
-```
-
-Now we register the type-handler, named 'Time'. (Type-handler registration follows the form of an assignment.)
-
-```js
-W$TYPE={ $name:'Time',
-  onclick: function(el,ev){ var e=ev.target;
-    if(e.nodeName=='SUP' && e.getAttribute("name").startsWith('x-')){
-      e.previousElementSibling.value=null;
-    }else{
-      return null; // that means: not handled
-    }
-  }
-}
-```
-In case of clicking on `sup`, Weaveworld looks upward and finds the `div` with the `Time` (CSS) class, what has a registered _type-handler_ and have an onclick _rule definition_.
-
 ## High-level Event-handling ##
 
 In case of an event (not handled otherwise), Weaveworld tries to handle the event, starting from the event target element through parent elements. 
 
-If the element has a matching _event declaration_, that is an attribute that starts with `w:on:`... that follows the 'on' and the event name (e.g., `w:on:onclick`), then Weaveworld converts the event and tries to find the _event handler definition_ for that name in _type-handlers_. 
+If the element has a matching _event declaration_, that is an attribute that starts with `w:on:`... that follows the 'on' and the event name (e.g., `w:on:onclick`), then Weaveworld converts the event and tries to find the _event handler definition_ for that name in _type-handlers_. Type-handler registration follows the format of an assignment to `W$TYPE`.
+
 
 Let's see an example (See on [jsFiddle](https://jsfiddle.net/weaveworld/bag0kL8p/)):
 ```js
 W$DATA={
-  product:{ id: 123456, name: 'Bulb', amount:1, }
+  product:{ id:123456, name:'Bulb', amount:1, }
 };
 W$TYPE={ $name:'Amount',
   increaseAmount: function(el,ev){
@@ -80,7 +48,7 @@ Events may have **arguments**, given as JSON object. Because JSON uses quotation
 (See on [jsFiddle](https://jsfiddle.net/weaveworld/q90vrdjh/))
 ```js
 W$DATA={
-  product:{ id: 123456, name: 'Bulb', amount:1 }
+  product:{ id:123456, name:'Bulb', amount:1 }
 };
 W$TYPE={ $name:'Amount',
   changeAmount: function(el,ev,arg){ 
@@ -165,3 +133,35 @@ HTML element's event handling declarations can be the followings (in the order o
   * _name_: the redefined name
     * if the _name_ is empty, that means that the event is handled, no further event handling is needed
     * if the _name_ is `default`, that means that the event is partially handled, no further event handling is needed, but the default action has to be performed
+
+## Low-level Event-handling ##
+
+
+In case of an event (not handled otherwise), Weaveworld tries to make a "type-binding", starting from the event target element through parent elements, it checks if one of the element (CSS) class name is registered as a type-handler.
+
+Let's see the following element (see on [jsFiddle](https://jsfiddle.net/weaveworld/630xncta/)):
+```html
+<div class="Time t-container">
+  <input type="number" name="hour" value=23
+    ><sup class=wbutton name="x-hour">X</sup>
+  <input type="number" name="minute" value=59
+    ><sup class=wbutton name="x-minute">X</sup>
+  <input type="number" name="second" value=59
+    ><sup class=wbutton name="x-second">X</sup>
+</div> 
+```
+
+Now we register the type-handler, named 'Time'. (Type-handler registration follows the format of an assignment to `W$TYPE`.)
+
+```js
+W$TYPE={ $name:'Time',
+  onclick: function(el,ev){ var e=ev.target;
+    if(e.nodeName=='SUP' && e.getAttribute("name").startsWith('x-')){
+      e.previousElementSibling.value=null;
+    }else{
+      return null; // that means: not handled
+    }
+  }
+}
+```
+In case of clicking on `sup`, Weaveworld looks upward and finds the `div` with the `Time` (CSS) class, what has a registered _type-handler_ and have an onclick _rule definition_.
