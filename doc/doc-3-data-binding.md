@@ -55,7 +55,7 @@ To learn more about warnings, see: validation.
 
 ## Server call ##
 
-It is suggested to define a function to perform server (AJAX) calls, or redefine `W$CALL`. (The `w$ajax` utility function can be used as helper. `w$ajax` – so `W$CALL` – sets a `Pragma: W$CALL` header by default, so the server can identify these requests.)
+It is suggested to define a function to perform server (AJAX) calls, or redefine `W$CALL`. (The `w$ajax` utility function can be used as helper. `W$CALL` sets the `Pragma: W$CALL` header by default, so servere can identify these requests.)
 
 Currently, `W$CALL` is defined to be fit to REST APIs and "ONCE-style" server calls (ONCE is the server side part of the Weaveworld-ONCE environment).
 
@@ -63,10 +63,10 @@ Currently, `W$CALL` is defined to be fit to REST APIs and "ONCE-style" server ca
      <sub>[</sub>,_element_ <sub>[</sub>,_weaving_mode_ <sub>[</sub>,_weaving_data_<sub>]]]</sub>)
 *  _cmd_ has two formats based on that if there is or isn't a colon inside the _cmd_:
     * _METHOD_<sub>[</sub>.json<sub>]</sub>:<sub>[</sub>_URL_<sub>]</sub> – This format is mainly used for REST API.
-      * Performs an AJAX call via the _METHOD_. In case of the `.json` postfix, arguments are sent as JSON (instead of `application/x-www-form-urlencoded`)
+      * Performs an AJAX call via _METHOD_. Using the `.json` postfix, arguments are sent as JSON (instead of `application/x-www-form-urlencoded`)
       * Usually _URL_ is relative to the [base URL](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base).
       * E.g., `W$CALL('GET:task',el)`
-      * E.g., `W$CALL('DELETE:task/'+this.id,{},el,'-')`
+      * E.g., `W$CALL('DELETE:task/'+this.id,el,'-')`
       * E.g., `W$CALL('POST:task/'+this.id,arg,el)`
       * E.g., `W$CALL('POST.json:task/'+this.id,arg,el)`
     * the **name** of the server function to be called – this is a POST request for the [base URL](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base) with JSON arguments. 
@@ -74,7 +74,7 @@ Currently, `W$CALL` is defined to be fit to REST APIs and "ONCE-style" server ca
 * _arg_: arguments of the call
 * _element_: the base element for weaving
 * _weaving_mode_: the weave mode; if it is not specified but the _element_ is, the default mode is '' (i.e., merge).
-* _weave_data_: this parameter overrides the data to be weaved. The default data to be weaved is the result of the server call.
+* _weaving_data_: this parameter overrides the data to be weaved. The default data to be weaved is the result of the server call.
 
 `W$CALL`(_cmd_ <sub>[</sub>,_arg_<sub>]</sub>, _function_): an alternate form with a callback function.
 
@@ -103,12 +103,12 @@ W$TYPE={ $name:'Item',
 The actual way to get initial data is determined by the `W$DATA` and the `W$START` variables.
 
 * **No data**: `W$DATA` and `W$START` are both **undefined** (this is the default).
-  * This means no template actualization. This way the page can be viewed in its raw form, containing only example data.
+  * This case means no template actualization. This way the page can be viewed in its raw form, containing only example data.
 * **Server data**: `W$START` is a **string** and `W$DATA` can be given.
   * In this case `W$CALL` is called with the `W$START` parameter and `W$DATA` arguments and the result is used for data-binding.
   * E.g., `W$START="GET:/task";`
-  * E.g., `W$START="GET:/qr"; W$DATA=w$getParameters();` // using get parameters 
-  * E.g., `W$START="GET:/q"; W$DATA=w$getParameters({extended:1});` // using get parameters with defaults
+  * E.g., `W$START="GET:/qr"; W$DATA=w$getParameters();` // using (http) GET parameters 
+  * E.g., `W$START="GET:/q"; W$DATA=w$getParameters({extended:1});` // using (http) GET parameters with defaults
 * **Inline data**: `W$DATA` is **defined** and `W$START` can be a function, and then it is called with the W$DATA argument, so its result will be used for data-binding.
   * This method is used, when the server modifies the page using some results of server and data is put directly into the page as a JavaScript assignment. (This can be used when HTML pages are targeted with POST requests.) 
   * This method can also be used for example or constant data.
