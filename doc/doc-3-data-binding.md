@@ -6,7 +6,7 @@ Weaveworld has a two-way data binding in ECMAScript 6 environment, so changing f
 
 Actualization can be directly invoked (e.g., in ECMAScript 5 environment) via the `w$refresh('now',el)` call, where `el` is the element to be actualized.
 
-There is a `w$weave` utility function to make easy to change data. It has a base HTML element, what has the current data or list of data-binding, has a mode, how to change the current data or list, and has the change data object.
+There is a `w$weave` utility function to make easy to change data. It has a base HTML **element** (which has the current data or list of data-binding), has a **mode**, i.e., how to change current data or list, and may have the **data** for the change.
 
 `w$refresh` automatizes most of the typical data changes, what can be performed only by a simple call.
 
@@ -25,21 +25,21 @@ W$TYPE={ $name:'Item',
 };
 ```
 
-`w$weave`(_el_, _mode_, _object_):
-* _el_: the element as the 'base' for the data change; in case of event handling, it is mostly the first (element) argument.
+`w$weave`(_el_  <sub>[</sub>,_mode_ <sub>[</sub>,_object_<sub>]</sub><sub>]</sub>):
+* _el_: the element as the 'basis' for data change. (Using _weaving_ in an event handler, that is mostly the first (element) argument.)
 * _mode_: an optional prefix and a code, what specifies the change
   * the mode may have a prefix
-    * '~': no clearing of warnings and no w$refresh
-    * '!': clearing of warnings and w$refresh
-    * if there's no prefix, then the true or false value of the WEAVEWORLD.W$REFRESH determines, if the '!' (in case of true) or the '~' (in case of false) is considered as default. Currently, it is set to true.
+    * '~': no clearing of warnings and no `w$refresh`
+    * '!': clearing of warnings and `w$refresh`
+    * if there's no prefix, then the true or false value of the `WEAVEWORLD.W$REFRESH` determines, if the '!' (in case of true) or the '~' (in case of false) is considered as default. Currently, it is set to true.
   * the code can be one of the following
     * '' (empty string) - it **merges** the fields of the _object_ into the current value.
-    * '[' - it adds the _object_ at the **beginning** of the list.
-    * ']' - it adds the _object_ at the **end** of the list.
-    * '<' - it inserts the _object_ into the list **before** the current data.
-    * '>' - it inserts the _object_ into the list **after** the current data.
-    * '-' - it **deletes** the current data from the list.
-    * '.' - it **replaces** in the list the current data with the _object_.
+    * '[' - it adds the _object_ at the **beginning** of the outer list.
+    * ']' - it adds the _object_ at the **end** of the outer list.
+    * '<' - it inserts the _object_ into the outer list **before** the current data.
+    * '>' - it inserts the _object_ into the outer list **after** the current data.
+    * '-' - it **deletes** the current data from the outer list.
+    * '.' - it **replaces** the current data with the _object_ in the outer list.
     * '#' - it **replaces the list** with the _object_ (what has to be an array).
     * '=' - it **replaces the current data** with the _object_; it _does perform_ a w$refresh.
     * '?' - it only loads **warnings**; it _does not perform_ w$refresh.
