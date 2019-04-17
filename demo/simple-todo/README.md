@@ -1,6 +1,6 @@
 ## Weaveworld simple To Do list (tutorial) ##
 
-Using Weaveworld is extremely simple.
+Using Weaveworld is very simple.
 
 (See the example on [jsFiddle](https://jsfiddle.net/gh/get/library/pure/weaveworld/Weaveworld/tree/master/demo/simple-todo/demo-jsFiddle/).)
 
@@ -15,8 +15,8 @@ The page can be opened by a browser and can be designed using some classes and C
 <!DOCTYPE html><html><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <<title>Weaveworld To Do List</title>
-  <script src="https://cdn.jsdelivr.net/gh/weaveworld/Weaveworld/w.js"></script>
-  <link href="https://cdn.jsdelivr.net/gh/weaveworld/Weaveworld/w.css" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/gh/weaveworld/Weaveworld@latest/w.js"></script>
+  <link href="https://cdn.jsdelivr.net/gh/weaveworld/Weaveworld@latest/w.css" rel="stylesheet"/>
   <script src="simple-todo.js"></script>
 </head>
 <body>
@@ -82,11 +82,11 @@ Now in a browser, the actualized content appears.
 ```
 
 1. `<body class=w>` - the "class=w" attribute provides that only the actualized content is shown.
-2. `<div w:item>` - "w:item" means _"the current data"_, so we use the current data.
+2. `<div w:item>` - "w:item" means _"current data"_, so we use the current data.
 3. `<span w:text=data.title>` - the element's text content will be replaced to the referenced data.
-4. `<sup w:text="({{list.length}})">` - double curly brackets trigger macro replacement in the text.
+4. `<sup w:text="({{list.length}})">` - double braces (curly brackets) trigger macro replacement in the text.
 5. `<ul w:each=list>` - iterating over the data.
-6. `<li w:item>` - the first element will be the repeated template, and inside that the current data is the base data.
+6. `<li w:item>` - the first element will be the repeated template, and inside that _base data_ will be the current element data.
 
 ### Simple type-binding and event-handling  ###
 
@@ -131,7 +131,7 @@ Now we declare the event-handler for the "-" button (see the `w:on:onclick=todoD
 ...
 ```
 
-In the `.js` file, let's register a "type-handler". (The "assignment" performs the registration.)    
+In the `.js` file, let's register a "type-handler". (Registration uses the format of an assignment.)    
 The name of the type-handler is given by the `$name` field.    
 In the type-handler, we define the `todoDelete` event-handler, as a simple function. 
 
@@ -148,11 +148,11 @@ W$TYPE={ $name:'Todo',
 2. `w$list(el)`: getting the outer iterated list for the element.
 3.  `this`: accessing the current data.
 4. `list.splice(list.indexOf(this),1)`: removing the element from the array.
-5. The `var list=w$list(el); list.splice(list.indexOf(this),1)` line can be replaced by a "- weaving", that is `w$weave(el,'-')`.
+5. The `var list=w$list(el); list.splice(list.indexOf(this),1)` line can be replaced by a "- weaving": `w$weave(el,'-')`, which removes the data bond to the HTML element from an outer list data.
 
-Refreshing the page in a browser, and clicking to the '-' button, the item will be removed, and furthermore, because of the two-way data-binding, the counter is also updated.
+Refreshing the page in a browser, and clicking on the '-' button, the item will be removed, and furthermore, because of the two-way data-binding, the counter is also updated.
 
-We can add another type-handler (this is not an assignment but a type-handler registration):
+We can add another type-handler (type-handler registration uses the format of an assignment):
 
 ```js
 W$TYPE={ $name:'TodoList',
