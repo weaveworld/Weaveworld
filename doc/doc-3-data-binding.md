@@ -128,7 +128,7 @@ W$TYPE={ $name:"Task",
 </form>
 ```
 
-* The server (like ONCE) can provide accessing its operations using GET requests (only in development mode). This way operations can be easily tested.
+* The server (like ONCE or the [Weaveworld Node.js module](https://github.com/weaveworld/weaveworld-app)) can provide accessing its operations using GET requests (only in development mode). This way, operations can easily be tested.
   * E.g., `http://localhost:3000/?!taskGet&id=1`
   * E.g., `http://localhost:3000/?!taskAdd&name=Task_1&state=1`
   * E.g., `http://localhost:3000/?!taskSet&id=1&state=3`
