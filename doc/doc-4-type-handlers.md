@@ -1,7 +1,7 @@
 # Weaveworld (ῶ) - Type-handlers, type-binding #
 
 There are two ways of **type-binding**:
-  * "**Context**" (or "class-based") **type-binding**: types of DOM parts are declared as one or more (CSS) classes in the HTML elements' class attributes. Context type-binding is used for **event handling** and **transformations**.
+  * "**Context**" (or "class-based") **type-binding**: types of DOM parts are declared as one or more (CSS) classes in the HTML elements' `class` attributes. Context type-binding is used for **event handling** and **transformations**.
   * **Prototype-binding**: the type of the bound element is declared in the `w:the` element, which will be the prototype of the bound data. 
     * For more advanced use, prototype-binding is needed.
     * Usually, prototype-binding is used in addition to the context type-binding, e.g. `<div class="Order Deliverable" w:item w:type=Order>...`
@@ -126,6 +126,6 @@ Type-handlers are defined as simple JavaScript objects, where its 'properties' a
 * **validators**  (_field_`$check`, _field_`$valid`)
 * **argument** declarations for event handlers and validators (_fn_`$arg`)
 * **(re)action context** event handlers (`$at$`_field_)
-* by convention, **enablement** declarations of event handlers have the '`s`' postfix (_fn_`$apt`)
+* by convention, **enablement** declarations of event handlers have the '`$apt`' postfix (_fn_`$apt`)
 * by convention, **permisson** codes are given by the `$for` rule
 * and other **helper methods** (a rule can access other rules using `this` keyword)
