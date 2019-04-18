@@ -1,17 +1,9 @@
-W$DATA={ 
-  list: [
-    { id: 1, text: 'clean the house' },
-    { id: 2, text: 'buy milk' }
-  ]
-};
-
 W$TYPE={ $name:'ToDo',
    newTodo: function(el,self){
      return { };
    },          
 };
 W$TYPE={ $name:'Item',
-    text$required: true,
     itemDelete: function(el,ev,arg){
       w$weave(el,'-'); 
     },      
@@ -24,4 +16,11 @@ W$TYPE={ $name:'Item',
       w$weave(el,']',{id:newId,text:arg.text});
       el.reset();
     }
+};
+
+W$DATA={ 
+  list: [
+    { id: 1, text: 'clean the house' },
+    { id: 2, text: 'buy milk' }
+  ]
 };
