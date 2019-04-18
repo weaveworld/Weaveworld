@@ -1,14 +1,15 @@
 # Weaveworld (ῶ) - Data-binding #
 
-Weaveworld has a two-way data binding in ECMAScript 6 environment, so changing fields of data (e.g., in event handler definition) causes actualization of the corresponding HTML elements.
+Weaveworld has a two-way data binding in ECMAScript 6 environment, so changing fields of data (e.g., in event handler definitions) causes actualization of the corresponding HTML elements.
 
 ## 'Weaving' - w$weave ##
 
-Actualization can be directly invoked (e.g., in ECMAScript 5 environment) via the `w$refresh('now',el)` call, where `el` is the element to be actualized.
+Actualization can be directly invoked (e.g., in ECMAScript 5 environment) via the `w$refresh('now',el)` call, where `el` is the element to be actualized. Calling only `w$refresh(el)` schedules actualizing the element, and all the scheduled actualization will automatically performed in a short period of time (~1/3 sec).
 
-There is a `w$weave` utility function to make easy to change data. It has a base HTML **element** (which has the current data or list of data-binding), has a **mode**, i.e., how to change current data or list, and may have the **data** for the change.
+There is a `w$weave` utility function to make easy to change data. That is the so called "_weaving_". It has a base HTML _**element**_ (which has the current data or list of data-binding), has a **mode**, i.e., how to change current data or list, and may have the **data** for the change.
 
-`w$refresh` automatizes most of the typical data changes, what can be performed only by a simple call.
+**"Weaving"** (`w$weave`) automatizes most of the typical data manipulations -looking for the HTML element's bound data or list, and making data manipulations-, what can be performed by a simple call.  
+In case of weaving, _current data_ means the bound data to the _el_ HTML element (or the first outer HTML element which has bound data). And _outer list_ means the list data of the first outer HTML element which has bound _list_ data.
 
 ```js
 W$TYPE={ $name:'Order',
@@ -16,33 +17,33 @@ W$TYPE={ $name:'Order',
 W$TYPE={ $name:'Item',
   addItem$arg:"order:Order\\order_id",
   addItem: function(el,ev,arg){
-    weave(el,']',arg);
+    weave(el,']',arg); // add to the end of the outer list
   },
   removeItem$arg:"id",
   removeItem: function(el,ev,arg){
-    weave(el,'-');
+    weave(el,'-'); // remove from the outer list
   },
 };
 ```
 
 `w$weave`(_el_  <sub>[</sub>,_mode_ <sub>[</sub>,_object_<sub>]</sub><sub>]</sub>):
-* _el_: the element as the 'basis' for data change. (Using _weaving_ in an event handler, that is mostly the first (element) argument.)
-* _mode_: an optional prefix and a code, what specifies the change
-  * the mode may have a prefix
-    * '~': no clearing of warnings and no `w$refresh`
-    * '!': clearing of warnings and `w$refresh`
-    * if there's no prefix, then the true or false value of the `WEAVEWORLD.W$REFRESH` determines, if the '!' (in case of true) or the '~' (in case of false) is considered as default. Currently, it is set to true.
-  * the code can be one of the following
-    * '' (empty string) - it **merges** the fields of the _object_ into the current value.
-    * '[' - it adds the _object_ at the **beginning** of the outer list.
-    * ']' - it adds the _object_ at the **end** of the outer list.
-    * '<' - it inserts the _object_ into the outer list **before** the current data.
-    * '>' - it inserts the _object_ into the outer list **after** the current data.
-    * '-' - it **deletes** the current data from the outer list.
-    * '.' - it **replaces** the current data with the _object_ in the outer list.
-    * '#' - it **replaces the list** with the _object_ (what has to be an array).
-    * '=' - it **replaces the current data** with the _object_; it _does perform_ a w$refresh.
-    * '?' - it only loads **warnings**; it _does not perform_ w$refresh.
+* _el_: the element as the 'basis' for data change. (Using _weaving_ in an event handler definition, that is mostly the first (element) argument.) 
+* _mode_: an optional _prefix_ and a _code_, what specifies the change
+  * The mode may have a _prefix_
+    * '~': _**no**_ clearing of warnings and no `w$refresh`
+    * '!': _**forced**_ clearing of warnings and `w$refresh`
+    * if there's no prefix, then the true or false value of the `WEAVEWORLD.W$REFRESH` determines, if the '!' (in case of true) or the '~' (in case of false) is considered as default. Currently, it is set to true (set to "forced").
+  * The _code_ can be
+    * '' (i.e., empty string) - it **merges** the fields of the _object_ into the current value.
+    * '[' - adds the _object_ at the **beginning** of the outer list.
+    * ']' - adds the _object_ at the **end** of the outer list.
+    * '<' - inserts the _object_ into the outer list **before** the current data.
+    * '>' - nserts the _object_ into the outer list **after** the current data.
+    * '-' - **deletes** the current data from the outer list.
+    * '.' - **replaces** the current data with the _object_ in the outer list.
+    * '#' - **replaces the list** with the _object_ (what has to be an array).
+    * '=' - **replaces the current data** with the _object_; it _does perform_ a w$refresh.
+    * '?' - only loads **warnings**; it _does not perform_ w$refresh.
 * _object_: the data.
 
 The steps of `w$weave`:
@@ -59,7 +60,7 @@ It is suggested to define a function to perform server (AJAX) calls, or redefine
 
 Currently, `W$CALL` is defined to be fit to REST APIs and "ONCE-style" server calls (ONCE is the server side part of the Weaveworld-ONCE environment).
 
-`W$CALL`(_cmd_ <sub>[</sub>,_arg_<sub>]</sub>
+`W$CALL`(<sub>[</sub>_cmd_<sub>]</sub> <sub>[</sub>,_arg_<sub>]</sub>
      <sub>[</sub>,_element_ <sub>[</sub>,_weaving_mode_ <sub>[</sub>,_weaving_data_<sub>]]]</sub>)
 *  _cmd_ has two formats based on that if there is or isn't a colon inside the _cmd_:
     * _METHOD_<sub>[</sub>.json<sub>]</sub>:<sub>[</sub>_URL_<sub>]</sub> – This format is mainly used for REST API.
@@ -72,6 +73,7 @@ Currently, `W$CALL` is defined to be fit to REST APIs and "ONCE-style" server ca
     * the **name** of the server function to be called – this is a POST request for the [base URL](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base) with JSON arguments. 
       * (In case of "ONCE-style" AJAX calls)   
 * _arg_: arguments of the call
+* (One of the _cmd_ or _arg_ is required. Both of them can be given.)
 * _element_: the base element for weaving
 * _weaving_mode_: the weave mode; if it is not specified but the _element_ is, the default mode is '' (i.e., merge).
 * _weaving_data_: this parameter overrides the data to be weaved. The default data to be weaved is the result of the server call.
@@ -98,9 +100,43 @@ W$TYPE={ $name:'Item',
 };
 ```
 
+**_Note_**: Using ONCE-style server parameters, the operation name is given by a property, which name starts with an '`!`' (exclamation mark). Usually values of the "operation name" properties are not processed, so they can contain anything. This method has several advantages:
+* Operation name and all the arguments can be given as a single JSON object.
+```js
+W$TYPE={ $name:"Task", 
+  DELETED: 0, 
+  ACTIVE: 1, 
+  STARTED: 2, 
+  COMPLETED:3,
+  taskAdd: function(el,ev,arg){
+    W$CALL({'!taskAdd':'', name:arg.name, state:this.ACTIVE }, el, ']')
+  },
+  taskStarted: function(el,ev,arg){
+    W$CALL({'!taskSet':'', id:this.id, state:this.STARTED }, el)
+  },
+  taskCompleted: function(el,ev,arg){
+    W$CALL({'!taskSet':'', id:this.id, state:this.COMPLETED }, el)
+  },  
+  ...
+```
+* The name attributes of HTML `<button` ...`>` and `<input type="`_submit_|_button_|...`"` ...`>` elements can refer to the operation name (started by '`!`').
+```html
+<form ...>
+  <button type=submit name="!taskSet">Save</button>
+  <button type=button name="!taskUnset">Delete</button>
+  <button type=reset >Reset</button>
+</form>
+```
+
+* The server (like ONCE) can provide accessing its operations using GET requests (only in development mode). This way operations can be easily tested.
+  * E.g., `http://localhost:3000/?!taskGet&id=1`
+  * E.g., `http://localhost:3000/?!taskAdd&name=Task_1&state=1`
+
+**_Note_**: To use other server call methods (e.g., to access old [JSON-RPC](https://en.wikipedia.org/wiki/JSON-RPC)), the `W$CALL` can be redefined.
+
 ## Initial data ##
 
-The actual way to get initial data is determined by the `W$DATA` and the `W$START` variables.
+The actual way to get **initial data** is determined by the `W$DATA` and the `W$START` variables.
 
 * **No data**: `W$DATA` and `W$START` are both **undefined** (this is the default).
   * This case means no template actualization. This way the page can be viewed in its raw form, containing only example data.
