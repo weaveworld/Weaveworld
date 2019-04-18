@@ -6,7 +6,7 @@ Weaveworld has a two-way data binding in ECMAScript 6 environment, so changing f
 
 Actualization can be directly invoked (e.g., in ECMAScript 5 environment) via the `w$refresh('now',el)` call, where `el` is the element to be actualized. Calling only `w$refresh(el)` schedules actualizing the element, and all the scheduled actualization will automatically performed in a short period of time (~1/3 sec).
 
-There is a `w$weave` utility function to make easy to change data. That is the so called "_weaving_". It has a base HTML _**element**_ (which has the current data or list of data-binding), has a **mode**, i.e., how to change current data or list, and may have the **data** for the change.
+There is a `w$weave` utility function to make easier to change data. That is the so called "_weaving_". It has a base HTML _**element**_ (which has the current data or list of data-binding), has a **mode**, i.e., how to change current data or list, and may have the **data** for the change.
 
 **"Weaving"** (`w$weave`) automatizes most of the typical data manipulations -looking for the HTML element's bound data or list, and making data manipulations-, what can be performed by a simple call.  
 In case of weaving, _current data_ means the bound data to the _el_ HTML element (or the first outer HTML element which has bound data). And _outer list_ means the list data of the first outer HTML element which has bound _list_ data.
@@ -27,12 +27,12 @@ W$TYPE={ $name:'Item',
 ```
 
 `w$weave`(_el_  <sub>[</sub>,_mode_ <sub>[</sub>,_object_<sub>]</sub><sub>]</sub>):
-* _el_: the element as the 'basis' for data change. (Using _weaving_ in an event handler definition, that is mostly the first (element) argument.) 
+* _el_: the element as the 'basis' for data change. (Using _weaving_ in an event handler definition, that is mostly the first (element) argument of the event-handler "rule".) 
 * _mode_: an optional _prefix_ and a _code_, what specifies the change
   * The mode may have a _prefix_
     * '~': _**no**_ clearing of warnings and no `w$refresh`
     * '!': _**forced**_ clearing of warnings and `w$refresh`
-    * if there's no prefix, then the true or false value of the `WEAVEWORLD.W$REFRESH` determines, if the '!' (in case of true) or the '~' (in case of false) is considered as default. Currently, it is set to true (set to "forced").
+    * if there's no prefix, then the `true` or `false` value of the `WEAVEWORLD.W$REFRESH` determines, if the '!' (in case of `true`) or the '~' (in case of `false`) is considered as default. Currently, it is set to `true` (set to "forced").
   * The _code_ can be
     * '' (i.e., empty string) - it **merges** the fields of the _object_ into the current value.
     * '[' - adds the _object_ at the **beginning** of the outer list.
@@ -44,7 +44,7 @@ W$TYPE={ $name:'Item',
     * '#' - **replaces the list** with the _object_ (what has to be an array).
     * '=' - **replaces the current data** with the _object_; it _does perform_ a w$refresh.
     * '?' - only loads **warnings**; it _does not perform_ w$refresh.
-* _object_: the data.
+* _object_: the (modification) data.
 
 The steps of `w$weave`:
 1. Firstly, it may clear warnings for the data (namely, all the fields which ends with '$warning' is set to `undefined`).
@@ -76,7 +76,7 @@ Currently, `W$CALL` is defined to be fit to REST APIs and "ONCE-style" server ca
 * (One of the _cmd_ or _arg_ is required. Both of them can be given.)
 * _element_: the base element for weaving
 * _weaving_mode_: the weave mode; if it is not specified but the _element_ is, the default mode is '' (i.e., merge).
-* _weaving_data_: this parameter overrides the data to be weaved. The default data to be weaved is the result of the server call.
+* _weaving_data_: this argument overrides the data to be weaved. The default data to be weaved is the result of the server call.
 
 `W$CALL`(_cmd_ <sub>[</sub>,_arg_<sub>]</sub>, _function_): an alternate form with a callback function.
 

@@ -1,19 +1,19 @@
 # Weaveworld (ῶ) - Templates #
 
-Using Weaveworld, one can create HTML pages with example data, and can use it as templates, what will be actualized based on the current data.
+Using Weaveworld, HTML pages with example data can be used as templates, which will be actualized based on the current data.
 Initially, the value of W$DATA is used.   
 
-(During initialization, Weaveworld transforms DOM into a lightweight representation, what will be used during actualization. For production use, a filter program can create more compact pages without the examples.)
+(During initialization, Weaveworld transforms DOM into a lightweight representation. For production use, a filter program can create more compact pages without the examples.)
 
 ## Template control ##
 
-Template engine can be controlled by specific element attributes, which are started by the `w:` prefix.    
+Template engine can be controlled by element attributes, which are started by the `w:` prefix.    
 Most attributes are handled as macros.     
 
-If there's no `{{` in the attribute, then the whole attribute is evaluated as an expression.
+If there's no `{{` in the attribute, then the whole attribute value is evaluated as an expression.
 * e.g., `<sup w:text="code">1234</sup>`
 
-If there are one or more `{{` signs in the attribute, then they will be evaluated and replaced by the result.
+If there are one or more `{{` signs in the attribute, then they are evaluated and replaced by their results.
 * e.g., `<sup w:text="[{{parent}}-{{code}}]">[x12-1234]</sup>`
 
 That means, that `"X"` and `"{{X}}"` are handled in the same way.
@@ -29,7 +29,7 @@ In case of conditionals, values are considered false, if they're `undefined`, `n
 Building blocks of expressions (from higher to lower precedence):
 
 * **Field, value, expression**
-  * empty expression means **current data**, so empty `w:item` means "the current data"   
+  * **empty** expression means **current data**, so empty `w:item` means "current data"   
     e.g., `<div w:item="">...` or `<div w:item>...`
   * **field** (containing letters, `$`, `@`, `_` and digits, and not started with digit)   
     e.g., `<input w:attr:maxlength="name$length"...`
@@ -37,9 +37,9 @@ Building blocks of expressions (from higher to lower precedence):
     e.g., `list.length`
   * **field of a context**: A`\`B means field B in context A, where empty context is the root  
     e.g., `Group\name` looks upward for a Group and gets its name  
-    e.g., `\user.name` looks from the root (W$DATA) and gets the user's name
+    e.g., `\user.name` looks for the root (W$DATA) and gets the user's name
   * **value**: `true`, `false`, `null`, `undefined`, `0`, `1`, `""`, `''`
-  * simple **expression** (limited)  
+  * simple **expression** (limited). (Only the simplest expressions are allowed; for more complex rules use transformations.)  
     e.g., `<span w:text="'none'">`...      
     
 * **Negation (complement)**: `!`A
@@ -71,11 +71,12 @@ Transformation *search order*:
 
 **1.** Type-handlers of the element and its parents.
 
-A transformation can be defined as a function "rule" in the typehandler. Parameters are:
+A transformation can be defined as a function "rule" in the type-handler. Parameters are:
 * _el_: the processed element. (Thus the element attributes or the content can be changed!)
 * _v_: the value to be changed.
 * _p_: the (optional) literal pattern.
 
+The following example defines a `toFixed` transformation for the `Order` type-handler:
 ```js
 W$TYPE={ $name:'Order',
     toFixed: function(el,v,p){
@@ -111,37 +112,35 @@ Initially Weaveworld has the following built-in transformations:
   * `[?]`: condition conversion to `true` or `false`    
     * e.g., `<div w:attr:contenteditable="[?]code$isEditable"` ...
     * e.g., `<div w:show="[?]details"` ...   
+    * (The `[?]` transformation is performed via `w$is` redefinable utility function.)
   * `[?? `<sub>[</sub>`'`_string_`'`<sub>]</sub>`]`: conversion to "HTML conditional", that is the _string_ (default is empty string) or `null`.
      * e.g., `<input type=radio w:attr:checked="[??]code='1'" value="1"` ...
      * e.g., `<input type=radio w:attr:checked="[?? 'checked']code='1'" value="1"` ...  
   * `[?1]`: conversion to `1` or `0`
-    * e.g., `<div w:data:open="[?1]opened"` ...
+    * e.g., `<div w:data:open="[?1]opened"` ...    
 * complementer condition-conversion
   * `[!]`: complementer condition to `false` or `true`.
     * e.g., `<div w:attr:contenteditable="[!]comment$isLocked"` ...
+    * (The `[!]` transformation is performed via `w$toggle` redefinable utility function.)
   * `[!! `<sub>[</sub>`'`_string_`'`<sub>]</sub>`]`: conversion to "HTML conditional", that is `null` or the _string_ (default is empty string).
   * `[!1]`: conversion to `0` or `1`.
 * `[{} `<sub>[</sub>FIELD_ASSIGNS<sub>]</sub>`]`: extracts values into an object. 
-    * e.g., `<div w:item="[{}]"` ... - uses a new empty object
+    * e.g., `<div w:item="[{}]"` ... - uses a new empty object.
 
-(Transformations are performed via `w$is` and `w$toggle` redefinable utility functions)
+## Type-binding (class, w:type) ##
 
-## Type-binding (class, w:type) ##      
-
-Basic data-binding and event handling are performed by default.
-
-For advanced use, type-binding is needed.
-
+Basic data-binding is performed by default.  
+For more advanced use, [type-binding](doc-4-type-handlers) is needed.
   
 ## Navigation, condition, iteration ##  
   
 * **w:item** - navigates to the data, and that will be the current data.  
 Empty `w:item` means "current data".
-  * e.g., `<div w:item="group"` ... - uses the group field of the current data.
+  * e.g., `<div w:item="group"` ... - uses the `group` field of the current data.
   * e.g., `<div w:item` ... - uses the current data.
-  * e.g., `<body w:item=""` ... - uses (the base) W$DATA.
+  * e.g., `<body w:item=""` ... - starts to use (the initial) W$DATA at the body element.
 
-The following example navigates to the `user` and uses its `email`.
+The following example navigates to the `user` and uses its `email` value.
 ```html
 <div w:item="user">
   <div w:text="email"></div>
@@ -163,7 +162,7 @@ The following example navigates to the `user` and uses its `email`.
 
 * **w:each** - navigates to the value, and iterates on it.
 
-There basic form is the following: the outer element is marked by a `w:each`, and one or more inner elements are marked by an empty `w:item`, as "the current data". During iteration only the first marked element will be used as the template.
+The basic form is the following: the outer element is marked by a `w:each`, and one or more inner elements are marked by an empty `w:item`, as "the current data". During iteration only the first marked element will be used as template.
 
 ```html
 <ul w:each=list>
@@ -216,8 +215,8 @@ Using w:each there's an optional **w:when** attribute, what can filter the resul
   * e.g., `<div w:data:open="hasItems?1:0"` ...
 
 * **w:style:X** - sets or removes the given style attribute.
-  * e.g., `<span w:style:fontWeight=loggedin?'bold':'normal'` ...
-  * e.g., `<span w:style:width="{{o_hir|17.7}}%"` ...
+  * e.g., `<span w:style:fontWeight="loggedin?'bold':null"` ...
+  * e.g., `<span w:style:width="{{o_r|17.7}}%"` ...
 
 * **w:set:X** - sets or removes the given property of the element.
   * e.g., `<select w:set:value=areacode` ...

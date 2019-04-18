@@ -1,6 +1,6 @@
 # Weaveworld (ῶ) - Events #
 
-First of all, [DOM event-handling](https://www.w3.org/TR/DOM-Level-2-Events/events.html) can be used, which overrides Weaveworld's event handling.
+First of all, [DOM event-handling](https://www.w3.org/TR/DOM-Level-2-Events/events.html) can also be used, which overrides Weaveworld's event handling.
 
 Example DOM Level 2 event-handler:
 ```html
@@ -17,9 +17,6 @@ If the element has a matching _event declaration_, that is an attribute that sta
 
 Let's see an example (See on [jsFiddle](https://jsfiddle.net/weaveworld/bag0kL8p/)):
 ```js
-W$DATA={
-  product:{ id:123456, name:'Bulb', amount:1, }
-};
 W$TYPE={ $name:'Amount',
   increaseAmount: function(el,ev){
     ++this.amount;
@@ -27,7 +24,10 @@ W$TYPE={ $name:'Amount',
   decraseAmount: function(el,ev){
     --this.amount;
   },
-}
+};
+W$DATA={
+  product:{ id:123456, name:'Bulb', amount:1, }
+};
 ```
 
 ```html
@@ -47,14 +47,14 @@ Events may have **arguments**, given as JSON object. Because JSON uses quotation
 
 (See on [jsFiddle](https://jsfiddle.net/weaveworld/q90vrdjh/))
 ```js
-W$DATA={
-  product:{ id:123456, name:'Bulb', amount:1 }
-};
 W$TYPE={ $name:'Amount',
   changeAmount: function(el,ev,arg){ 
     this.amount+=arg.n;
   },
-}
+};
+W$DATA={
+  product:{ id:123456, name:'Bulb', amount:1 }
+};
 ```
 
 ```html
@@ -67,19 +67,19 @@ W$TYPE={ $name:'Amount',
 </div>
 ```
 
-Weaveworld handles an optional `$arg` definition for the event. Firstly, the arguments are collected based on the current value (in case of a named element with value it is added, too), and after that arguments of the event declaration are added. 
+Weaveworld handles an optional `$arg` definition for the event. 
+  1. Firstly, arguments are collected based on the current data and the `$arg` value. 
+  2. After that, arguments of the event declaration are added. 
+  3. In case of a named element with `value` property - e.g. [input](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement), [select](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement) - its value is added, too. 
 
 * `$arg` format: argument specifications, separated by _commas_,   
 where an argument specification
     * _name_ (that is a shorthand for _name_=_name_) or
     * _name_`:`[template expression](doc-1-template.md#template-expressions) (based on the current value).
     
-It is suggested to use the redefined W$CALL function to make server (AJAX) calls. (It is also suggested to handle 'weaving' in the W$CALL for the element, that is to actualize the current data of the element.) Using the `$arg` feature, the arguments for the server call can be prepared.
+It is suggested to use the redefined W$CALL function to make server (AJAX) calls. (It is also suggested to handle 'weaving' in the W$CALL for the element, that is actualizing the current data of the element.) Using the `$arg` feature, the arguments for the server call can be prepared.
 
 ```js
-W$DATA={
-  product:{ id: 123456, name: 'Bulb', amount:1 }
-};
 W$TYPE={ $name:'Amount',
   changeAmount$arg: "id",
   changeAmount: function(el,ev,arg){ 
@@ -87,31 +87,33 @@ W$TYPE={ $name:'Amount',
     console.log(arg);
     // W$CALL('changeAmount',arg, el)
   },
-}
+};
+W$DATA={
+  product:{ id: 123456, name: 'Bulb', amount:1 }
+};
 ```
-
 
 ## Event-handling, parameters and return values ##
 
 **Event handler** ('rule') **parameters** (_el_,_ev_,_arg_):
 * `this`: current data (of data binding, which prototype is the type-handler).
-*  _el_: the element of _type-binding_, that is the element with the class attribute, which declares the type, that is defined as a type-handler.
+*  _el_: the HTML element of _type-binding_, that is the element with the class attribute of the declared type.
 * _ev_: the original event.
   * `ev.target` can be used to get the target element of the original event.
-* _arg_: arguments, collected by the $arg definition and event declaration (JSON) arguments.
+* _arg_: arguments, collected by the $arg definition, event declaration (JSON) arguments and the value property of a named element.
 
 **Event handler** ('rule') **return value**:
   * `undefined` (e.g., no return statement at all): the event is handled.
   * `null`: the event is not handled, so Weaveworld has to keep on to look for the handler.  
-  (_preventDefault_, _cancelBubble_, _stopPropagation_)
+  (I.e., _preventDefault_, _cancelBubble_, _stopPropagation_)
   * `false`: the event is partially handled, only the default action has to be performed.  
-  (_cancelBubble_, _stopPropagation_)
+  (I.e., _cancelBubble_, _stopPropagation_)
 
 **Event declaration arguments** are given as JSON object. 
   * Arguments are processed only if there's a (maybe empty object, i.e., `{}`) JSON value.
   * Firstly, the _event name_`$arg` is processed. Format: argument specifications, separated by _commas_,   
 where an argument specification is
-    * _name_ (that is a shorthand for _name_=_name_) or
+    * _name_ (that is a shorthand for _name_:_name_) or
     * _name_`:`[template expression](doc-1-template.md#template-expressions) (based on the current value).
   * The data of the JSON arguments are added.
   * If the HTML element has the `w:name` or `name` attribute, and has a `w:value` attribute or the `value` property, then it is added.
@@ -136,8 +138,7 @@ HTML element's event handling declarations can be the followings (in the order o
 
 ## Low-level Event-handling ##
 
-
-In case of an event (not handled otherwise), Weaveworld tries to make a "type-binding", starting from the event target element through parent elements, it checks if one of the element (CSS) class name is registered as a type-handler.
+In case of an event (not handled otherwise), Weaveworld tries to make a "context type-binding": starting from the event target element through parent elements, it checks if one of the element (CSS) class name is registered as a type-handler.
 
 Let's see the following element (see on [jsFiddle](https://jsfiddle.net/weaveworld/630xncta/)):
 ```html
@@ -164,4 +165,4 @@ W$TYPE={ $name:'Time',
   }
 }
 ```
-In case of clicking on `sup`, Weaveworld looks upward and finds the `div` with the `Time` (CSS) class, what has a registered _type-handler_ and have an onclick _rule definition_.
+In case of clicking on a `sup` element, Weaveworld looks upward and finds the `div` with the `Time` (CSS) class, what has a registered _type-handler_ and have an onclick _rule definition_.
