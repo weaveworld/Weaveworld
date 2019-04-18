@@ -131,6 +131,7 @@ W$TYPE={ $name:"Task",
 * The server (like ONCE) can provide accessing its operations using GET requests (only in development mode). This way operations can be easily tested.
   * E.g., `http://localhost:3000/?!taskGet&id=1`
   * E.g., `http://localhost:3000/?!taskAdd&name=Task_1&state=1`
+  * E.g., `http://localhost:3000/?!taskSet&id=1&state=3`
 
 **_Note_**: To use other server call methods (e.g., to access old [JSON-RPC](https://en.wikipedia.org/wiki/JSON-RPC)), the `W$CALL` can be redefined.
 
