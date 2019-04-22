@@ -43,7 +43,7 @@ W$DATA={
 ```
 In case of clicking on one of the buttons, when Weaveworld find a `w:on:onclick` attribute, the event name will be converted using the attribute value.
 
-Events may have **arguments**, given as JSON object. Because JSON uses quotation marks, it is practical to write the attribute value between apostrophes.
+Events may have **arguments**, given in the `$arg` format (see below) between parentheses. 
 
 (See on [jsFiddle](https://jsfiddle.net/weaveworld/q90vrdjh/))
 ```js
@@ -62,8 +62,8 @@ W$DATA={
   <span w:text=name>Product name</span>
   <!--!w:css! div.Amount>input[name="amount"]{ max-width:4em; }--> 
   <input type="number" name="amount" w:set:value="amount">
-  <input type="button" class=wbutton value="+" w:on:onclick='changeAmount{"n":1}'>
-  <input type="button" class=wbutton value="-" w:on:onclick='changeAmount{"n":-1}'>
+  <input type="button" class=wbutton value="+" w:on:onclick='changeAmount(n:1)'>
+  <input type="button" class=wbutton value="-" w:on:onclick='changeAmount(n:-1)'>
 </div>
 ```
 
@@ -100,7 +100,7 @@ W$DATA={
 *  _el_: the HTML element of _type-binding_, that is the element with the class attribute of the declared type.
 * _ev_: the original event.
   * `ev.target` can be used to get the target element of the original event.
-* _arg_: arguments, collected by the $arg definition, event declaration (JSON) arguments and the value property of a named element.
+* _arg_: arguments, based on the $arg definition, event declaration arguments (between parentheses) and the value property of a named element.
 
 **Event handler** ('rule') **return value**:
   * `undefined` (e.g., no return statement at all): the event is handled.

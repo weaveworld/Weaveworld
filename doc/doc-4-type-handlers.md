@@ -32,7 +32,7 @@ W$TYPE={ $name:'Product',
 
 ## w:type ##
 
-Using the `w:type` attribute, the current bond data will have the declared type-handler as **prototype**, so it has to be used with the `w:item`, what sets current data.
+Using the `w:type` attribute, the current bond data will have the declared type-handler as **prototype**, so it has to be used with the `w:item` (which sets current data). Prototype-binding is an extension of context type-binding, so the `w:type` type-name is added to the element's classes.
 
 * **Prototype-binding** (based on `w:type` attribute) provides
   * computed properties,
@@ -123,7 +123,9 @@ Type-handlers are defined as simple JavaScript objects, where its 'properties' a
   * _field_`$type`: type of the field
   * _field_`$required`: type of the field
   * _field_`$length`: length of the field
-* **validators**  (_field_`$check`, _field_`$valid`)
+  * _field_`$min`: minimum value of a number or date field
+  * _field_`$max`: maximum value of a number or date field
+* **validators** (_field_`$check`, _field_`$valid`)
 * **argument** declarations for event handlers and validators (_fn_`$arg`)
 * **(re)action context** event handlers (`$at$`_field_)
 * by convention, **enablement** declarations of event handlers have the '`$apt`' postfix (_fn_`$apt`)
