@@ -32,7 +32,7 @@ W$TYPE={ $name:'Product',
 
 ## w:type ##
 
-Using the `w:type` attribute, the current bond data will have the declared type-handler as **prototype**, so it has to be used with the `w:item` (which sets current data). Prototype-binding is an extension of context type-binding, so the `w:type` type-name is added to the element's classes.
+Using the `w:type` attribute, the current bond data will have the declared type-handler as **prototype**, so it has to be used with the `w:item` (which sets current data). Prototype-binding is an extension of context type-binding, so the `w:type` type-name is added to the element's classes if it isn't present.
 
 * **Prototype-binding** (based on `w:type` attribute) provides
   * computed properties,
