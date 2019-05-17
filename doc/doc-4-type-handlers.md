@@ -121,7 +121,7 @@ Type-handlers are defined as simple JavaScript objects, where its 'properties' a
 * **derived properties** (`get` getter functions)    
 * **super-template** field attributes, e.g.,
   * _field_`$type`: type of the field
-  * _field_`$required`: type of the field
+  * _field_`$required`: is the field required
   * _field_`$length`: length of the field
   * _field_`$min`: minimum value of a number or date field
   * _field_`$max`: maximum value of a number or date field
