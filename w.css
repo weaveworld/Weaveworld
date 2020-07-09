@@ -77,7 +77,7 @@ input.winput[readonly],select.winput[readonly]{ opacity:0.5; }
 .wglass{ opacity:0;  font-weight:bold;
   position:fixed; width:100%; height:100%; top:0px; left:0px; z-index:2147483647; 
 }
-.wglass[disabled]{ opacity:0.2; background-color:#ccc; 
+.wglass[disabled]{ opacity:0.2; background-color:#ccc; cursor:wait;
 }
 .werror{ color:white; background-color:red; 
   position:fixed; width:100%; _height:100%; top:0px; left:0px; z-index:2147483647; 
